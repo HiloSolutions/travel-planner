@@ -1,16 +1,19 @@
 import './App.css';
-import { Route } from "react-router-dom";
-import Nav from './components/Nav';
-import LoginButton from './components/buttons/LoginButton';
-import LogoutButton from './components/buttons/LogoutButton';
+import { Routes, Route } from "react-router-dom";
+import Home from './views/Home';
 import Profile from './views/Profile';
+import Nav from './components/Nav';
+
+
 function App() {
   return (
-    <div className="body">
-      <LoginButton />
-      <LogoutButton />
-      <Profile />
-    </div>
+    <>
+      <Nav />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/profile' element={<Profile />} />
+      </Routes>
+    </>
   );
 }
 
