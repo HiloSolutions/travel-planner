@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import LoginButton from './buttons/LoginButton';
 import LogoutButton from './buttons/LogoutButton';
 
@@ -7,14 +7,15 @@ const Nav = () => {
   return (
     <nav>
       <ul>
+
         <li>
-          <Link to="/">Home</Link>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
-          <Link to="/trips">My Trips</Link>
+          <NavLink to="/trips">Trips</NavLink>
         </li>
         <li>
           <LoginButton />
@@ -22,6 +23,7 @@ const Nav = () => {
         <li>
           <LogoutButton />
         </li>
+
       </ul>
     </nav>
   )
