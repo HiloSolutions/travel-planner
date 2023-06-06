@@ -16,7 +16,10 @@ const App = () => {
       <Nav />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route
+          path='/profile'
+          element={<Profile />}
+        />
         <Route path='/trips' element={<TripLayout />}>
           <Route index element={<MyTrips />} />
           <Route path=':id/:name' element={<Trip />} />
