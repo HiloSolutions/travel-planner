@@ -14,6 +14,9 @@ const Nav = () => {
           <Link to="/profile">Profile</Link>
         </li>
         <li>
+          <Link to="/trips">My Trips</Link>
+        </li>
+        <li>
           <LoginButton />
         </li>
         <li>
