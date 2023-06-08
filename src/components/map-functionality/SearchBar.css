@@ -1,0 +1,18 @@
+.search-bar-container {
+  display: "flex";
+  align-self: "center" 0;
+  justify-content: "center" 0;
+  flex-direction: "column" 0;
+  padding: 20;
+}
+
+.search-bar-dropdown {
+  padding: 5;
+  justify-content: "normal";
+  font-size: 20;
+  color: "blue";
+  margin: 1;
+  width: "250px";
+  border-color: "green";
+  border-width: "10px";
+}
