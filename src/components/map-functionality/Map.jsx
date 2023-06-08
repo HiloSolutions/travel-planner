@@ -1,11 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { 
   GoogleMap, 
   Marker, 
   useLoadScript,
-  withGoogleMap //HOC to provide necessary google maps functionality 
 } from '@react-google-maps/api';
-import Loading from './Loading';
+import Loading from '../Loading';
 
 
 const Map = ({ className, lat, lng, isMarkerShown }) => {
@@ -38,6 +37,10 @@ const Map = ({ className, lat, lng, isMarkerShown }) => {
           mapContainerClassName={className}
           center={center}
           zoom={10}
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+          }}
         >
           {isMarkerShown &&
             <Marker
