@@ -12,7 +12,7 @@ import NotFound from './views/NotFound';
 
 const App = () => {
   return (
-    <>
+    <div className='app-container'>
       <Nav />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -24,7 +24,7 @@ const App = () => {
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

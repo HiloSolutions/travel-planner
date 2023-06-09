@@ -1,10 +1,56 @@
-.inactive {
-  color: blue;
+
+* {
+  box-sizing: border-box;
 }
 
-.active {
-  color: red;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
+
+
+* {
+  border: none;
+}
+
+.app-container {
+  width: 100%;
+
+}
+
+html {
+  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+menu,
+ol,
+ul {
+    padding-left: 0;
+}
+
+
+article ol,
+article ul {
+    list-style-position: inside;
+}
+
+
+label,
+button,
+select,
+summary,
+[type=radio],
+[type=submit],
+[type=checkbox] {
+    cursor: pointer;
+}
+
 
 .map {
   height: 400px;
@@ -14,4 +60,10 @@
 .map-container {
   height: 100%;
   width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+        scroll-behavior: smooth;
+  }
 }

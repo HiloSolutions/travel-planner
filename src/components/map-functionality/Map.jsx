@@ -1,16 +1,17 @@
 import React, { useMemo, useState } from 'react';
-import { 
-  GoogleMap, 
-  Marker, 
+import {
+  GoogleMap,
+  Marker,
   useLoadScript,
 } from '@react-google-maps/api';
 import Loading from '../Loading';
 
 
 const Map = ({ className, lat, lng, isMarkerShown }) => {
-
+  const [ libraries ] = useState(['places']);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries
   });
 
   const center = useMemo(() => ({
@@ -33,23 +34,25 @@ const Map = ({ className, lat, lng, isMarkerShown }) => {
       {!isLoaded ? (
         <Loading />
       ) : (
-        <GoogleMap
-          mapContainerClassName={className}
-          center={center}
-          zoom={10}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-          }}
-        >
-          {isMarkerShown &&
-            <Marker
-              position={{ lat, lng }}
-              icon={customMarker}
-            />
-          }
+        <>
+          <GoogleMap
+            mapContainerClassName={className}
+            center={center}
+            zoom={10}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+            }}
+          >
+            {isMarkerShown &&
+              <Marker
+                position={{ lat, lng }}
+                icon={customMarker}
+              />
+            }
 
-        </GoogleMap>
+          </GoogleMap>
+        </>
       )}
     </div>
   );

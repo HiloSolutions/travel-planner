@@ -12,7 +12,14 @@ const SignupButton = () => {
     });
   };
 
-  return <button onClick={handleSignup}>Sign Up</button>;
+  return (
+    <button
+      type="button"
+      className="btn btn-light"
+      onClick={handleSignup}>
+      Register for Free
+    </button>
+  )
 };
 
 export default SignupButton
