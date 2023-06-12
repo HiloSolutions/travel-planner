@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faBars } from '@fortawesome/free-solid-svg-icons'
-import LoginButton from "../buttons/LoginButton";
-import SignupButton from "../buttons/SignupButton";
-import LogoutButton from "../buttons/LogoutButton";
 import './Nav.css';
 import Logo from './Logo';
+import NavBarButtons from './NavBarButtons';
+import SearchBar from './SearchBar';
 
 
 const Nav = () => {
-  const [isOpen, setIsOpen] = useState(false);
+
   const { isAuthenticated } = useAuth0();
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+
 
   return (
     <header>
-      <div className='empty'>
+      <div className='nav-container'>
         <div className="top-navigation">
           <div className="logo">
             <NavLink to="/"><Logo /></NavLink>
           </div>
           <nav>
-            {!isAuthenticated && (
+            {isAuthenticated && (
               <div className="nav-menu">
                 <ul>
                   <>
@@ -43,45 +38,13 @@ const Nav = () => {
                 </ul>
               </div>
             )}
-            <form className='search'>
-              <div className="search-inputs">
-                <label for="location">
-                  <div className="label">Location</div>
-                  <input
-                    name="location"
-                    id="location"
-                    placeholder="Where are you going?"
-                  />
-                </label>
-              </div>
-              <div class="search-button">
-                <button>
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-              </div>
-            </form>
+
           </nav>
-          <div className={`dropdown-container ${isOpen ? 'open' : ''}`}>
-            <button className="dropdown-button" onClick={toggleDropdown}>
-              <FontAwesomeIcon icon={faBars} />
-              <i class="fas fa-chevron-down"></i>
-            </button>
-            <div className="dropdown-menu">
-              {!isAuthenticated && (
-                <>
-                  <SignupButton />
-                  <LoginButton />
-                </>
-              )}
-              {isAuthenticated && (
-                <>
-                  <LogoutButton />
-                </>
-              )}
-            </div>
-          </div>
+          <NavBarButtons />
         </div>
+        <SearchBar />
       </div>
+
     </header>
   )
 }

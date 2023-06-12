@@ -1,0 +1,37 @@
+
+#dropdown-button {
+  background-color: #fff;
+  border-radius: 50px;
+  max-width: 10rem;
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+#dropdown-button:hover {
+  box-shadow: rgba(37, 202, 172, 0.7) 0px 0px 0px 3px;
+}
+
+
+#nav-profile-picture {
+  min-width: 45px;
+  height: 45px;
+  background-color: #717171;
+  border-radius: 50%;
+  margin-left: 1.5rem;
+}
+
+#nav-profile-picture img {
+  border-radius: 50%;
+}
+
+.fa-profile-picture {
+  width: 50%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.hamburger-menu {
+  color: #717171;
+  width: 50%;
+}
