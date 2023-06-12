@@ -4,3 +4,11 @@
   font-size: 1.5em;
 }
 
+.logo-text {
+  padding-left: 8px;
+  font-size: 32px; 
+  color: #FFFFFF;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+}
+

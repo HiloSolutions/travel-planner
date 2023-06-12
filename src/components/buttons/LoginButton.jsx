@@ -12,7 +12,7 @@ const LoginButton = () => {
   return (
     <button
       type="button"
-      className="btn btn-outline-light btn-lg"
+      className="dropdown-item"
       onClick={handleLogin}>
       Log In
     </button>

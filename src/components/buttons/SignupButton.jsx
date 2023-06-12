@@ -15,7 +15,7 @@ const SignupButton = () => {
   return (
     <button
       type="button"
-      className="btn btn-light"
+      className="dropdown-item"
       onClick={handleSignup}>
       Register for Free
     </button>
