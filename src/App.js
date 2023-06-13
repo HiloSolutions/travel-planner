@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 import { Routes, Route } from "react-router-dom";
@@ -16,6 +16,9 @@ import { updateUserInDb, getUserData } from './api/userEndpoints';
 const App = () => {
 
   const { user } = useAuth0();
+  const [trips, setTrips] = useState([]);
+
+  //adds user to db then retrieves user from the db whenever user is known.
 
   //adds user to db then retrieves user from the db whenever user is known.
   useEffect(() => {
@@ -23,11 +26,14 @@ const App = () => {
       updateUserInDb(user.sub)
         .then(() => {
           getUserData(user.sub)
+          .then((res) => {
+            setTrips(res);
+          })
         })
+        
     }
 
   }, [user]);
-
 
   return (
     <div className='app-container'>
@@ -35,7 +41,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/trips' element={<TripLayout />}>
+        <Route path='/trips' element={<TripLayout trips={trips}/>}>
           <Route index element={<MyTrips />} />
           <Route path=':id/:name' element={<Trip />} />
         </Route>

@@ -6,6 +6,7 @@ import Loading from '../components/Loading';
 import Map from '../components/map-functionality/Map';
 import SearchBar from '../components/map-functionality/SearchBar';
 import './Trip.css';
+
 const Trip = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { isAuthenticated, isLoading } = useAuth0();

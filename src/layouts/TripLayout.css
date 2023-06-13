@@ -1,18 +1,16 @@
-
-
 .trip-list {
-  width: 30vw;
+  width: 36vw;
   min-width: 300px;
   padding: 3rem 3rem 3rem 6rem;
   font-family: 'Roboto', sans-serif;
 }
 
-.trip-list a, 
+.trip-list a,
 .trip-list h1 {
-    font-size: 32px;
-    line-height:  60px;
-    color: #183153;
-    letter-spacing: -1.2px;
+  font-size: 32px;
+  line-height: 60px;
+  color: #183153;
+  letter-spacing: -1.2px;
 }
 
 .trip-list h1 {
@@ -27,24 +25,25 @@
 
 .trip-list a:hover {
   text-decoration: none;
- }
+}
 
 
 .trip-list-item {
   display: flex;
+  gap: 2rem;
   align-items: center;
-  margin-bottom: 2rem;
+  padding: 1rem;
   border-bottom: 1px solid #DCE0E0;
   cursor: pointer;
 }
 
 
-.trip-list-item h3{
+.trip-list-item h3 {
   font-size: 20px;
   font-weight: 500;
 }
 
-.trip-list-item p{
+.trip-list-item p {
   font-size: 18px;
   color: #7c7c7c;
   line-height: 20px;
@@ -54,4 +53,24 @@
 .trip-list img {
   width: 150px;
   border-radius: 1rem;
+}
+
+.trip-list-controls .fa-menu {
+  border: 1px solid #DCE0E0;
+  border-radius: 3px;
+  padding: 1px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #183153;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.trip-list-controls .fa-menu:hover {
+  border: 3px solid #25CAAC;
+  color: #25CAAC;
+}
+
+.hovered {
+  background-color: #f8f8f8;
 }
