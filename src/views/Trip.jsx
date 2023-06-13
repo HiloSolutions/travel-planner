@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import Map from '../components/map-functionality/Map';
 import SearchBar from '../components/map-functionality/SearchBar';
-
+import './Trip.css';
 const Trip = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { isAuthenticated, isLoading } = useAuth0();
@@ -18,7 +18,7 @@ const Trip = () => {
   return (
     isAuthenticated && (
       <div>
-        <h1>{name}</h1>
+        <h2>{name}</h2>
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}

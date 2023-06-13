@@ -1,0 +1,45 @@
+
+.alert-container {
+  display: flex;
+
+  width: 95%;
+  border: 1px solid #DCE0E0;
+  border-radius: 3rem;
+  margin: 5rem 2.5%;
+  overflow: hidden;
+}
+
+.left {
+  padding: 3rem;
+  flex: 1;
+}
+
+.right {
+  flex: 2;
+  background-image: url("../../../public/road-trip.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.left h2 {
+  font-size: 32px;
+  line-height:  60px;
+  color: #183153;
+  font-weight: 400;
+  letter-spacing: -1.2px;
+}
+
+.left p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 300;
+  color: #909090;
+  letter-spacing: -0px;
+  margin-bottom:  1.8rem;
+}
+
+.left img {
+  margin-bottom: 35px;
+}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../components/Loading';
-import AlertBox from '../components/AlertBox';
+import trips from '../sample-data/trips';
+
 
 
 const MyTrips = () => {
@@ -13,7 +14,9 @@ const MyTrips = () => {
 
   return (
     isAuthenticated && (
-      <AlertBox />
+      <div id='my-trips-alert-box-container'>
+       write something here...
+      </div>
     )
   );
 };

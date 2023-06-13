@@ -20,8 +20,8 @@ const App = () => {
         <Route path='/trips' element={<TripLayout />}>
           <Route index element={<MyTrips />} />
           <Route path=':id/:name' element={<Trip />} />
-          <Route path='new' element={<NewTrip />} />
         </Route>
+        <Route path='/trips/new' element={<NewTrip />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
