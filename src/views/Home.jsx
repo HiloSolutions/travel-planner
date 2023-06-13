@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
+import Nav from '../components/navigation/Nav';
 import Loading from '../components/Loading';
 
 
-const Home = () => {
+const Home = ({navSearch}) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
 
@@ -13,6 +14,7 @@ const Home = () => {
 
   return (
     <div>
+      <Nav navSearch={navSearch}/>
       <h1>Home</h1>
       {isAuthenticated && (
         <>

@@ -59,16 +59,6 @@ summary,
 }
 
 
-.map {
-  height: 400px;
-  width: 400px;
-}
-
-.map-container {
-  height: 100%;
-  width: 100%;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   html {
         scroll-behavior: smooth;

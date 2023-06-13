@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Nav from './components/navigation/Nav';
 import Home from './views/Home';
 import Profile from './views/Profile';
-import TripLayout from './layouts/TripLayout';
 import MyTrips from './views/MyTrips';
 import Trip from './views/Trip';
 import NewTrip from './views/NewTrip';
@@ -26,25 +24,22 @@ const App = () => {
       updateUserInDb(user.sub)
         .then(() => {
           getUserData(user.sub)
-          .then((res) => {
-            setTrips(res);
-          })
+            .then((res) => {
+              setTrips(res);
+            })
         })
-        
+
     }
 
   }, [user]);
 
   return (
     <div className='app-container'>
-      <Nav />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home navSearch={true}/>} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/trips' element={<TripLayout trips={trips}/>}>
-          <Route index element={<MyTrips />} />
-          <Route path=':id/:name' element={<Trip />} />
-        </Route>
+        <Route path='/trips' element={<MyTrips trips={trips} />} />
+        <Route path='/trips/:id/:name' element={<Trip />} />
         <Route path='/trips/new' element={<NewTrip />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

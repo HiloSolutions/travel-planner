@@ -7,7 +7,7 @@ import NavBarButtons from './NavBarButtons';
 import SearchBar from './SearchBar';
 
 
-const Nav = () => {
+const Nav = ({navSearch}) => {
 
   const { isAuthenticated } = useAuth0();
 
@@ -42,7 +42,7 @@ const Nav = () => {
           </nav>
           <NavBarButtons />
         </div>
-        <SearchBar />
+        {navSearch && <SearchBar />}
       </div>
 
     </header>
