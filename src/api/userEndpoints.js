@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const checkIfUserExists = () => {
-  return axios.get('http://localhost:8000/api/user/check')
+const getUserData = (sub) => {
+  return axios.get('http://localhost:8000/api/user/getData', {
+    params: { sub }
+  })
     .then((response) => {
-      console.log('getting user data HI', response.data);
+      console.log('getting user data', response.data);
       return response.data;
     });
 };
@@ -19,6 +21,6 @@ const updateUserInDb = (sub) => {
 };
 
 export { 
-  checkIfUserExists,
+  getUserData,
   updateUserInDb
  };

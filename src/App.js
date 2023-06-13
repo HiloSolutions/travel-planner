@@ -10,7 +10,7 @@ import MyTrips from './views/MyTrips';
 import Trip from './views/Trip';
 import NewTrip from './views/NewTrip';
 import NotFound from './views/NotFound';
-import { updateUserInDb } from './api/userEndpoints';
+import { updateUserInDb, getUserData } from './api/userEndpoints';
 
 
 const App = () => {
@@ -21,8 +21,8 @@ const App = () => {
   useEffect(() => {
     if (user) {
       updateUserInDb(user.sub)
-        .then((res) => {
-          console.log('res', res);
+        .then(() => {
+          getUserData(user.sub)
         })
     }
 
