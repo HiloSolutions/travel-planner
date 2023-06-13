@@ -7,7 +7,7 @@ const SearchBar = () => {
   return (
     <form className='search'>
       <div className="search-inputs">
-        <label for="location">
+        <label htmlFor="location">
           <div className="label">Location</div>
           <input
             name="location"
@@ -16,7 +16,7 @@ const SearchBar = () => {
           />
         </label>
       </div>
-      <div class="search-button">
+      <div className="search-button">
         <button>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>

@@ -65,7 +65,7 @@ const NavBarButtons = () => {
         onClose={handleClose}
       >
         {!isAuthenticated && (
-          <>
+          <div>
             <MenuItem onClick={handleClose} disableRipple>
               <LoginButton />
             </MenuItem>
@@ -76,10 +76,10 @@ const NavBarButtons = () => {
             <MenuItem onClick={handleClose} disableRipple>
               FAQ
             </MenuItem>
-          </>
+          </div>
         )}
         {isAuthenticated && (
-          <>
+          <div>
             <MenuItem onClick={handleClose} disableRipple>
               <LogoutButton />
             </MenuItem>
@@ -87,7 +87,7 @@ const NavBarButtons = () => {
             <MenuItem onClick={handleClose} disableRipple>
               Account Settings
             </MenuItem>
-          </>
+          </div>
         )}
 
       </StyledMenu>

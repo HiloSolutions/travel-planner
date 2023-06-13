@@ -3,7 +3,6 @@ import axios from 'axios';
 const getPlacesAPI = () => {
 
   const url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json';
-
   const input = 'Paris';
   const inputType = 'textquery';
   const fields = '';

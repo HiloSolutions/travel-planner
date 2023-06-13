@@ -6,9 +6,11 @@ import Loading from '../components/Loading';
 const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
+
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div>
       <h1>Home</h1>

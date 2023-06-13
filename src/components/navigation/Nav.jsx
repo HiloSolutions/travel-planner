@@ -24,17 +24,17 @@ const Nav = () => {
             {isAuthenticated && (
               <div className="nav-menu">
                 <ul>
-                  <>
-                    <li>
-                      <NavLink className="nav-link" to="/">Explore Countries</NavLink>
-                    </li>
-                    <li>
-                      <NavLink className="nav-link" to="/trips">My Trips</NavLink>
-                    </li>
-                    <li>
-                      <NavLink className="nav-link" to="/profile">My Profile</NavLink>
-                    </li>
-                  </>
+
+                  <li>
+                    <NavLink className="nav-link" to="/">Explore Countries</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="nav-link" to="/trips">My Trips</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="nav-link" to="/profile">My Profile</NavLink>
+                  </li>
+
                 </ul>
               </div>
             )}
