@@ -1,5 +1,29 @@
 import axios from 'axios';
 
+const login = () => {
+  return axios.get('http://localhost:8000/auth/login')
+    .then((response) => {
+      console.log('login', response.data);
+      return response.data;
+    });
+}
+
+const logout = () => {
+  return axios.get('http://localhost:8000/auth/logout')
+  .then((response) => {
+    console.log('logout', response.data);
+    return response.data;
+  });
+}
+
+const register = () => {
+  return axios.get('http://localhost:8000/auth/register')
+  .then((response) => {
+    console.log('register', response.data);
+    return response.data;
+  });
+}
+
 
 const getUserData = (sub) => {
   return axios.get('http://localhost:8000/api/user/getData', {
@@ -21,5 +45,8 @@ const updateUserInDb = (sub) => {
 
 export { 
   getUserData,
-  updateUserInDb
+  updateUserInDb,
+  login,
+  logout,
+  register
  };

@@ -73,10 +73,8 @@ const TripLayout = ({ trips }) => {
         <div className='layout-box'>
           <ul className='layout-box-trip-list'>{makeTripLinks(trips)}</ul>
           <Map
-            className="map-container"
-            lat={5}
-            lng={40}
-            isMarkerShown={false}
+            lat={53.6539}
+            lng={-113.6293}
           />
         </div>
         <Outlet />
