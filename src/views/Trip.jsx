@@ -11,7 +11,8 @@ import './Trip.css';
 
 const Trip = () => {
   const { isAuthenticated, isLoading } = useAuth0();
-  const { name } = useParams();
+  const { name, id } = useParams();
+
 
   if (isLoading) {
     return <Loading />;
@@ -29,7 +30,7 @@ const Trip = () => {
               <h5 className="card-title text-white">{name}</h5>
               <h6 className="card-subtitle text-white">Alternative caption</h6>
             </div>
-            <Form />
+            <Form tripId={id}/>
           </div>
 
 

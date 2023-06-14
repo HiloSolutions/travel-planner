@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { updateTripInDatabase } from '../../api/tripEndpoints';
 import './Form.css';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
@@ -52,14 +53,14 @@ const MakeSlider = styled(Slider)({
 });
 
 
-const Form = () => {
+const Form = ({tripId}) => {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [startDate, setStartDate] = useState({});
   const [endDate, setEndDate] = useState({});
   const [zoom, setZoom] = useState(10);
 
-console.log(lat, lng, startDate, endDate, zoom)
+
   const validateSubmission = () => {
     const newLat = lat || 5;
     const newLng = lng || 5;
@@ -74,8 +75,8 @@ console.log(lat, lng, startDate, endDate, zoom)
       end_date: newEndDate,
       zoom: newZoom,
     };
-
-    //updateDatabase(submissionValues);
+console.log(submissionValues,1 )
+    updateTripInDatabase(submissionValues, tripId);
   };
 
   return (
