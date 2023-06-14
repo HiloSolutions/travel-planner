@@ -9,61 +9,7 @@ import { styled } from '@mui/material/styles';
 
 
 
-//make date field inputs
-const MakeDateFields = () => {
-  const [date, setDate] = useState(null);
 
-  const dateFieldInputs = [
-    { label: 'Start Date', name: 'startDate', value: 5 },
-    { label: 'End Date', name: 'endDate', value: 5 }
-  ];
-
-  return dateFieldInputs.map((field, index) => {
-
-    return (
-      <div key={index} className='input-container'>
-        <InputLabel
-          sx={{ fontWeight: "medium", width: "20%" }}
-          className="mt-3"
-        >
-          {field.label}
-        </InputLabel>
-        <DatePicker />
-      </div>
-    );
-  });
-};
-
-//make text field inputs
-const MakeTextFields = () => {
-  const [num, setNum] = useState(null);
-
-  const textFieldInputs = [
-    { label: 'Latitude', name: 'lat', value: 5 },
-    { label: 'Longitude', name: 'lng', value: 5 },
-  ];
-
-  return textFieldInputs.map((field, index) => {
-
-    return (
-      <div key={index} className='input-container'>
-        <InputLabel
-          sx={{ fontWeight: "medium", width: "20%" }}
-          className="mt-3"
-        >
-          {field.label}
-        </InputLabel>
-        <TextField
-          className='textfield'
-          defaultValue={field.value}
-          name={field.name}
-          type="number"
-          onChange={(e) => setNum(e.target.value)}
-        />
-      </div>
-    );
-  });
-};
 
 
 const MakeSlider = styled(Slider)({
@@ -107,16 +53,110 @@ const MakeSlider = styled(Slider)({
 
 
 const Form = () => {
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+  const [startDate, setStartDate] = useState({});
+  const [endDate, setEndDate] = useState({});
+  const [zoom, setZoom] = useState(10);
+
+console.log(lat, lng, startDate, endDate, zoom)
+  const validateSubmission = () => {
+    const newLat = lat || 5;
+    const newLng = lng || 5;
+    const newStartDate = startDate || 5;
+    const newEndDate = endDate || 5;
+    const newZoom = zoom || 10;
+
+    const submissionValues = {
+      lat: newLat,
+      lng: newLng,
+      start_date: newStartDate,
+      end_date: newEndDate,
+      zoom: newZoom,
+    };
+
+    //updateDatabase(submissionValues);
+  };
 
   return (
     <form className='form-container'>
-      <MakeDateFields />
-      <MakeTextFields />
+
+      {/* start date input */}
+      <div className='input-container'>
+        <InputLabel
+          sx={{ fontWeight: "medium", width: "20%" }}
+          className="mt-3"
+        >
+          Start Date
+        </InputLabel>
+        <DatePicker
+          onChange={(date) => setStartDate(date)}
+        />
+      </div>
+
+      {/* END date input */}
+      <div className='input-container'>
+        <InputLabel
+          sx={{ fontWeight: "medium", width: "20%" }}
+          className="mt-3"
+        >
+          Start Date
+        </InputLabel>
+        <DatePicker
+          onChange={(date) => setEndDate(date)}
+        />
+      </div>
+
+      {/* latitude input */}
+      <div className='input-container'>
+        <InputLabel
+          sx={{ fontWeight: "medium", width: "20%" }}
+          className="mt-3"
+        >
+          Latitude
+        </InputLabel>
+        <TextField
+          className='textfield'
+          defaultValue={5}
+          name='lat'
+          type="number"
+          onChange={(e) => setLat(Number(e.target.value))}
+        />
+      </div>
+
+      {/* longitude input */}
+      <div className='input-container'>
+        <InputLabel
+          sx={{ fontWeight: "medium", width: "20%" }}
+          className="mt-3"
+        >
+          Longitude
+        </InputLabel>
+        <TextField
+          className='textfield'
+          defaultValue={5}
+          name='lng'
+          type="number"
+          onChange={(e) => setLng(Number(e.target.value))}
+        />
+      </div>
+
+      {/* zoom */}
       <MakeSlider
         valueLabelDisplay="auto"
         aria-label="pretto slider"
         defaultValue={20}
+        onChange={(e, newValue) => setZoom(newValue)}
       />
+
+      {/* buttons to submit or edit */}
+      <Button
+        variant="contained"
+        onClick={validateSubmission}
+      >
+        Save Changes
+      </Button>
+
     </form>
   );
 };
