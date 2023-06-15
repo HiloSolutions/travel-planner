@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { updateTripInDatabase } from '../../api/tripEndpoints';
+import React, { useState, useEffect } from 'react';
+import { updateTripInDatabase, getTripData } from '../../api/tripEndpoints';
 import './Form.css';
+import Loading from '../Loading';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
@@ -53,113 +54,109 @@ const MakeSlider = styled(Slider)({
 });
 
 
-const Form = ({tripId}) => {
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-  const [startDate, setStartDate] = useState({});
-  const [endDate, setEndDate] = useState({});
-  const [zoom, setZoom] = useState(10);
+const Form = ({ tripId }) => {
+  const [tripValues, setTripValues] = useState(null);
+
+  useEffect(() => {
+    getTripData(tripId)
+      .then((res) => {
+        setTripValues({
+          lat: res.trip_center_lat,
+          lng: res.trip_center_lng,
+          startDate: res.trip_start_date,
+          endDate: res.trip_end_date,
+          zoom: res.zoom,
+        });
+      });
+  }, [tripId]);
+
 
 
   const validateSubmission = () => {
-    const newLat = lat || 5;
-    const newLng = lng || 5;
-    const newStartDate = startDate || 5;
-    const newEndDate = endDate || 5;
-    const newZoom = zoom || 10;
-
+    const { lat, lng, startDate, endDate, zoom } = tripValues;
+  
     const submissionValues = {
-      lat: newLat,
-      lng: newLng,
-      start_date: newStartDate,
-      end_date: newEndDate,
-      zoom: newZoom,
+      lat,
+      lng,
+      start_date: startDate,
+      end_date: endDate,
+      zoom,
     };
-console.log(submissionValues,1 )
+  
     updateTripInDatabase(submissionValues, tripId);
   };
 
+  if (!tripValues) {
+    return <Loading />; // Show a loading state until the tripValues are available
+  }
+  
   return (
     <form className='form-container'>
-
       {/* start date input */}
       <div className='input-container'>
-        <InputLabel
-          sx={{ fontWeight: "medium", width: "20%" }}
-          className="mt-3"
-        >
+        <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
           Start Date
         </InputLabel>
         <DatePicker
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => setTripValues({ ...tripValues, startDate: date })}
+          value={tripValues.startDate} // Add value prop to set the initial value
         />
       </div>
-
-      {/* END date input */}
+  
+      {/* end date input */}
       <div className='input-container'>
-        <InputLabel
-          sx={{ fontWeight: "medium", width: "20%" }}
-          className="mt-3"
-        >
-          Start Date
+        <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
+          End Date
         </InputLabel>
         <DatePicker
-          onChange={(date) => setEndDate(date)}
+          onChange={(date) => setTripValues({ ...tripValues, endDate: date })}
+          value={tripValues.endDate} // Add value prop to set the initial value
         />
       </div>
-
+  
       {/* latitude input */}
       <div className='input-container'>
-        <InputLabel
-          sx={{ fontWeight: "medium", width: "20%" }}
-          className="mt-3"
-        >
+        <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
           Latitude
         </InputLabel>
         <TextField
           className='textfield'
-          defaultValue={5}
+          defaultValue={tripValues.lat}
           name='lat'
-          type="number"
-          onChange={(e) => setLat(Number(e.target.value))}
+          type='number'
+          onChange={(e) => setTripValues({ ...tripValues, lat: Number(e.target.value) })}
         />
       </div>
-
+  
       {/* longitude input */}
       <div className='input-container'>
-        <InputLabel
-          sx={{ fontWeight: "medium", width: "20%" }}
-          className="mt-3"
-        >
+        <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
           Longitude
         </InputLabel>
         <TextField
           className='textfield'
-          defaultValue={5}
+          defaultValue={tripValues.lng}
           name='lng'
-          type="number"
-          onChange={(e) => setLng(Number(e.target.value))}
+          type='number'
+          onChange={(e) => setTripValues({ ...tripValues, lng: Number(e.target.value) })}
         />
       </div>
-
+  
       {/* zoom */}
       <MakeSlider
-        valueLabelDisplay="auto"
-        aria-label="pretto slider"
-        defaultValue={20}
-        onChange={(e, newValue) => setZoom(newValue)}
+        valueLabelDisplay='auto'
+        aria-label='pretto slider'
+        defaultValue={tripValues.zoom}
+        onChange={(e, newValue) => setTripValues({ ...tripValues, zoom: newValue })}
       />
-
+  
       {/* buttons to submit or edit */}
-      <Button
-        variant="contained"
-        onClick={validateSubmission}
-      >
+      <Button variant='contained' onClick={validateSubmission}>
         Save Changes
       </Button>
-
     </form>
   );
+  
 };
 
 export default Form;
