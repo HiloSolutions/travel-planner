@@ -30,6 +30,8 @@ const NavBarButtons = () => {
     setAnchorEl(null);
   };
 
+
+
   return (
     <div className='dropdown-button-container'>
       <Button
