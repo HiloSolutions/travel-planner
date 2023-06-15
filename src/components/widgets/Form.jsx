@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { updateTripInDatabase } from '../../api/tripEndpoints';
 import './Form.css';
 import Loading from '../Loading';
+import dayjs from 'dayjs';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
@@ -55,25 +56,32 @@ const MakeSlider = styled(Slider)({
 
 
 const Form = ({ tripId, tripValues, setTripValues }) => {
- 
+  const [sliderValue, setSliderValue] = useState(tripValues.zoom);
+
+
+  const handleSliderChange = (e, newValue) => {
+    setSliderValue(newValue);
+    setTripValues({ ...tripValues, zoom: newValue });
+  };
   const validateSubmission = () => {
     const { lat, lng, startDate, endDate, zoom } = tripValues;
-  
+
     const submissionValues = {
       lat,
       lng,
-      start_date: startDate,
-      end_date: endDate,
+      startDate,
+      endDate,
       zoom,
     };
-  
+
     updateTripInDatabase(submissionValues, tripId);
   };
+
 
   if (!tripValues) {
     return <Loading />; // Show a loading state until the tripValues are available
   }
-  
+
   return (
     <form className='form-container'>
       {/* start date input */}
@@ -83,10 +91,10 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
         </InputLabel>
         <DatePicker
           onChange={(date) => setTripValues({ ...tripValues, startDate: date })}
-          value={tripValues.startDate} // Add value prop to set the initial value
+          defaultValue={dayjs(tripValues.startDate)}
         />
       </div>
-  
+
       {/* end date input */}
       <div className='input-container'>
         <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
@@ -94,10 +102,10 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
         </InputLabel>
         <DatePicker
           onChange={(date) => setTripValues({ ...tripValues, endDate: date })}
-          value={tripValues.endDate} // Add value prop to set the initial value
+          defaultValue={dayjs(tripValues.endDate)}
         />
       </div>
-  
+
       {/* latitude input */}
       <div className='input-container'>
         <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
@@ -111,7 +119,7 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
           onChange={(e) => setTripValues({ ...tripValues, lat: Number(e.target.value) })}
         />
       </div>
-  
+
       {/* longitude input */}
       <div className='input-container'>
         <InputLabel sx={{ fontWeight: 'medium', width: '20%' }} className='mt-3'>
@@ -125,22 +133,23 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
           onChange={(e) => setTripValues({ ...tripValues, lng: Number(e.target.value) })}
         />
       </div>
-  
+
       {/* zoom */}
       <MakeSlider
         valueLabelDisplay='auto'
         aria-label='pretto slider'
         defaultValue={tripValues.zoom}
-        onChange={(e, newValue) => setTripValues({ ...tripValues, zoom: newValue })}
+        value={sliderValue}
+        onChange={handleSliderChange}
       />
-  
+
       {/* buttons to submit or edit */}
       <Button variant='contained' onClick={validateSubmission}>
         Save Changes
       </Button>
     </form>
   );
-  
+
 };
 
 export default Form;

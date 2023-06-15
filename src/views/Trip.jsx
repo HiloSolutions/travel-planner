@@ -23,7 +23,7 @@ const Trip = () => {
           lat: res.trip_center_lat,
           lng: res.trip_center_lng,
           startDate: res.trip_start_date,
-          endDate: res.trip_end_date,
+          endDate:  res.trip_end_date,
           zoom: res.zoom,
         });
       });

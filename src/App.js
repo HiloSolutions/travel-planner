@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
 import { Routes, Route } from "react-router-dom";
@@ -34,7 +34,7 @@ const App = () => {
   }, [user]);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className='app-container'>
         <Routes>
           <Route path='/' element={<Home navSearch={true} />} />
