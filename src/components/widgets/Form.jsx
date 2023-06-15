@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { updateTripInDatabase, getTripData } from '../../api/tripEndpoints';
+import React from 'react';
+import { updateTripInDatabase } from '../../api/tripEndpoints';
 import './Form.css';
 import Loading from '../Loading';
 import InputLabel from '@mui/material/InputLabel';
@@ -54,24 +54,8 @@ const MakeSlider = styled(Slider)({
 });
 
 
-const Form = ({ tripId }) => {
-  const [tripValues, setTripValues] = useState(null);
-
-  useEffect(() => {
-    getTripData(tripId)
-      .then((res) => {
-        setTripValues({
-          lat: res.trip_center_lat,
-          lng: res.trip_center_lng,
-          startDate: res.trip_start_date,
-          endDate: res.trip_end_date,
-          zoom: res.zoom,
-        });
-      });
-  }, [tripId]);
-
-
-
+const Form = ({ tripId, tripValues, setTripValues }) => {
+ 
   const validateSubmission = () => {
     const { lat, lng, startDate, endDate, zoom } = tripValues;
   

@@ -1,5 +1,6 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getTripData } from '../api/tripEndpoints';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from 'react-router-dom';
 import Map from '../components/map-functionality/Map';
@@ -9,12 +10,27 @@ import Loading from '../components/Loading';
 import Back from '../components/buttons/Back';
 import './Trip.css';
 
+
 const Trip = () => {
   const { isAuthenticated, isLoading } = useAuth0();
   const { name, id } = useParams();
+  const [tripValues, setTripValues] = useState(null);
+
+  useEffect(() => {
+    getTripData(id)
+      .then((res) => {
+        setTripValues({
+          lat: res.trip_center_lat,
+          lng: res.trip_center_lng,
+          startDate: res.trip_start_date,
+          endDate: res.trip_end_date,
+          zoom: res.zoom,
+        });
+      });
+  }, [id]);
 
 
-  if (isLoading) {
+  if (isLoading || !tripValues) {
     return <Loading />;
   }
 
@@ -30,13 +46,18 @@ const Trip = () => {
               <h5 className="card-title text-white">{name}</h5>
               <h6 className="card-subtitle text-white">Alternative caption</h6>
             </div>
-            <Form tripId={id}/>
+            <Form
+              tripId={id}
+              tripValues={tripValues}
+              setTripValues={setTripValues}
+            />
           </div>
 
 
           <Map
-            lat={5}
-            lng={40}
+            lat={tripValues.lat}
+            lng={tripValues.lng}
+            zoom={tripValues.zoom}
           />
         </div>
 

@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import './Map.css';
 
 
-const Map = ({ lat, lng }) => {
+const Map = ({ lat, lng, zoom }) => {
 
 
   return (
