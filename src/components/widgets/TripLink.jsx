@@ -30,8 +30,7 @@ const TripLink = ({ trip }) => {
           <img src={location} alt="trip icon" />
           <div className='trip-list-item-contents'>
             <h3>{trip.trip_name}</h3>
-            <p>{trip.location_name}</p>
-            <p>{trip.date_updated}</p>
+            <p>{`Last Edit: ${trip.date_updated}`}</p>
           </div>
           <div className='trip-list-controls'>
             <FontAwesomeIcon className='fa-menu' icon={faEllipsis} />

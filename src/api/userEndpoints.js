@@ -8,6 +8,7 @@ const login = () => {
     });
 }
 
+
 const logout = () => {
   return axios.get('http://localhost:8000/auth/logout')
   .then((response) => {
@@ -15,6 +16,7 @@ const logout = () => {
     return response.data;
   });
 }
+
 
 const register = () => {
   return axios.get('http://localhost:8000/auth/register')
@@ -24,15 +26,6 @@ const register = () => {
   });
 }
 
-
-const getUserData = (sub) => {
-  return axios.get('http://localhost:8000/api/user/getData', {
-    params: { sub }
-  })
-    .then((response) => {
-      return response.data;
-    });
-};
 
 const updateUserInDb = (sub) => {
   return axios.post('http://localhost:8000/api/user/update', null, {
@@ -44,7 +37,6 @@ const updateUserInDb = (sub) => {
 };
 
 export { 
-  getUserData,
   updateUserInDb,
   login,
   logout,

@@ -10,7 +10,8 @@ import MyTrips from './views/MyTrips';
 import Trip from './views/Trip';
 import NewTrip from './views/NewTrip';
 import NotFound from './views/NotFound';
-import { updateUserInDb, getUserData } from './api/userEndpoints';
+import { updateUserInDb } from './api/userEndpoints';
+import { getMyTrips } from './api/tripEndpoints'
 
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
     if (user) {
       updateUserInDb(user.sub)
         .then(() => {
-          getUserData(user.sub)
+          getMyTrips(user.sub)
             .then((res) => {
               setTrips(res);
             })

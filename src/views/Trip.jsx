@@ -7,6 +7,7 @@ import Map from '../components/map-functionality/Map';
 import Nav from '../components/navigation/Nav';
 import Form from '../components/widgets/Form';
 import Loading from '../components/Loading';
+import AlertBox from '../components/widgets/AlertBox';
 import Back from '../components/buttons/Back';
 import './Trip.css';
 
@@ -41,11 +42,11 @@ const Trip = () => {
   }, [id]);
 
 
-  if (isLoading || !tripValues || !locations) {
+  if (isLoading || !tripValues) {
     return <Loading />;
   }
 
-console.log(1, locations)
+  console.log(1, locations)
   return (
     isAuthenticated && (
       <>
@@ -64,6 +65,13 @@ console.log(1, locations)
               setTripValues={setTripValues}
               sliderValue={sliderValue}
             />
+            {(!locations || locations.length < 1) && (
+              <AlertBox 
+              url='https://www.flaticon.com/free-icon/sightseeing_7051603?term=sightseeing&page=1&position=10&origin=search&related_id=7051603'
+              text='Time to pick some locations!'
+              />
+            )
+            }
           </div>
 
 

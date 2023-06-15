@@ -1,7 +1,8 @@
 import React from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import './Map.css';
-import CustomMarker from './CustomMarker';
+import CustomMarker from './CustomMarker'
+
 
 
 
@@ -24,6 +25,7 @@ const Map = ({ lat, lng, zoom, locations }) => {
           ))
         )
         }
+        
       </MapContainer>
     </>
 
