@@ -15,7 +15,21 @@ const getTripData = (id) => {
     .then((response) => {
       return response.data;
     });
+};
+
+const getTripLocations = (id) => {
+  return axios.get('http://localhost:8000/trip/locations/', {
+    params: { id }
+  })
+  .then((response) => {
+    console.log(0, response.data)
+    return response.data;
+  })
 }
 
 
-export { updateTripInDatabase, getTripData };
+export { 
+  updateTripInDatabase, 
+  getTripData,
+  getTripLocations
+};

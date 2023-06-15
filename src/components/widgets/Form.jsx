@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { updateTripInDatabase } from '../../api/tripEndpoints';
 import './Form.css';
 import Loading from '../Loading';
@@ -55,12 +55,15 @@ const MakeSlider = styled(Slider)({
 });
 
 
-const Form = ({ tripId, tripValues, setTripValues }) => {
-  const [sliderValue, setSliderValue] = useState(tripValues.zoom);
-
+const Form = ({ 
+  tripId, 
+  tripValues, 
+  setTripValues,
+  sliderValue,
+}) => {
+  
 
   const handleSliderChange = (e, newValue) => {
-    setSliderValue(newValue);
     setTripValues({ ...tripValues, zoom: newValue });
   };
   const validateSubmission = () => {
@@ -116,6 +119,8 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
           defaultValue={tripValues.lat}
           name='lat'
           type='number'
+          max={180}
+          min={-180}
           onChange={(e) => setTripValues({ ...tripValues, lat: Number(e.target.value) })}
         />
       </div>
@@ -130,6 +135,8 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
           defaultValue={tripValues.lng}
           name='lng'
           type='number'
+          max={90}
+          min={-90}
           onChange={(e) => setTripValues({ ...tripValues, lng: Number(e.target.value) })}
         />
       </div>
@@ -141,6 +148,8 @@ const Form = ({ tripId, tripValues, setTripValues }) => {
         defaultValue={tripValues.zoom}
         value={sliderValue}
         onChange={handleSliderChange}
+        max={20}
+        min={1}
       />
 
       {/* buttons to submit or edit */}

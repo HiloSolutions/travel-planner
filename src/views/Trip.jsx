@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { getTripData } from '../api/tripEndpoints';
+import { getTripData, getTripLocations } from '../api/tripEndpoints';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from 'react-router-dom';
 import Map from '../components/map-functionality/Map';
@@ -15,6 +15,9 @@ const Trip = () => {
   const { isAuthenticated, isLoading } = useAuth0();
   const { name, id } = useParams();
   const [tripValues, setTripValues] = useState(null);
+  const [locations, setLocations] = useState(null);
+  const [sliderValue, setSliderValue] = useState(10);
+
 
   useEffect(() => {
     getTripData(id)
@@ -23,17 +26,26 @@ const Trip = () => {
           lat: res.trip_center_lat,
           lng: res.trip_center_lng,
           startDate: res.trip_start_date,
-          endDate:  res.trip_end_date,
+          endDate: res.trip_end_date,
           zoom: res.zoom,
         });
+        return getTripLocations(id);
+      })
+      .then((res) => {
+        setLocations(res);
+        setSliderValue(res.zoom);
+      })
+      .catch((error) => {
+        console.log(error)
       });
   }, [id]);
 
 
-  if (isLoading || !tripValues) {
+  if (isLoading || !tripValues || !locations) {
     return <Loading />;
   }
 
+console.log(1, locations)
   return (
     isAuthenticated && (
       <>
@@ -50,6 +62,7 @@ const Trip = () => {
               tripId={id}
               tripValues={tripValues}
               setTripValues={setTripValues}
+              sliderValue={sliderValue}
             />
           </div>
 
@@ -57,7 +70,8 @@ const Trip = () => {
           <Map
             lat={tripValues.lat}
             lng={tripValues.lng}
-            zoom={tripValues.zoom}
+            zoom={sliderValue}
+            locations={locations}
           />
         </div>
 

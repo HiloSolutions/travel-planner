@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import searchFilter from "./searchFilter";
-import { countries } from '../../sample-data/countries';
+import { countries } from '../../data/countries';
 
 
 
