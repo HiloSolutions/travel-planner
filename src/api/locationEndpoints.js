@@ -31,8 +31,8 @@ const deleteLocation = (tripId, locationId) => {
 
 
 //add new location to db
-const addLocationToDb = (tripId, sub) => {
-  return axios.post('http://localhost:8000/location/add', { tripId, sub })
+const addLocationToDb = (locationId, tripId, sub) => {
+  return axios.post('http://localhost:8000/location/add', { locationId, sub, tripId })
   .then((response) => {
     console.log('database updated with new location')
     return response.data;

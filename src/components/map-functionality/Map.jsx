@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import './Map.css';
 import { addLocationToDb } from '../../api/locationEndpoints';
 import CustomMarker from './CustomMarker';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const MapContent = ({ onClick }) => {
@@ -12,13 +13,16 @@ const MapContent = ({ onClick }) => {
   return null;
 };
 
+
+
 const Map = ({ 
   lat, 
   lng, 
   locations, 
-  setLocations 
+  setLocations,
+  tripId
 }) => {
-  
+  const { user } = useAuth0();
 
   const mapClicked = (e) => {
     const newLocation = {
@@ -29,7 +33,7 @@ const Map = ({
       location_type_name: 'No Category',
       id: new Date().getTime() // Generate a unique ID for each marker
     };
-    addLocationToDb(newLocation);
+    addLocationToDb(newLocation, tripId, user.sub);
     setLocations(prevLocations => [...prevLocations, newLocation]);
   };
 

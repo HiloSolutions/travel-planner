@@ -103,6 +103,7 @@ const Trip = () => {
             lng={tripValues.lng}
             locations={savedLocations}
             setLocations={setSavedLocations}
+            tripId={id}
           />
         </div>
       </>
