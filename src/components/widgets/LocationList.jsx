@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import image from '../../images/location.png';
-import ItemDropdownOptions from '../widgets/ItemDropdownOptions';
+import ItemDropdownOptions from './ItemDropdownOptions';
 import './LocationModal.css';
 
-const LocationModal = ({ location }) => {
+const LocationList = ({ location }) => {
   const [isHovered, setIsHovered] = useState(false);
+
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -28,10 +29,12 @@ const LocationModal = ({ location }) => {
           <h3>{location.location_name}</h3>
           <p>{`Tag: ${location.location_type_name}`}</p>
         </div>
-        <ItemDropdownOptions />
+        <ItemDropdownOptions
+          location={location}
+        />
       </div>
     </li>
   );
 };
 
-export default LocationModal;
+export default LocationList;

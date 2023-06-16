@@ -12,14 +12,14 @@ import {
 import ConfirmDeleteDialog from '../widgets/ConfirmDelete';
 import EditLocation from '../widgets/EditLocation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faEllipsis, 
-  faTrashCan, 
-  faPenToSquare 
+import {
+  faEllipsis,
+  faTrashCan,
+  faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
 import './ItemDropdownOptions.css';
 
-const ItemDropdownOptions = () => {
+const ItemDropdownOptions = ({ location }) => {
   const [openDelete, setOpenDelete] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
   const [anchorMenu, setAnchorMenu] = React.useState(null);
@@ -65,8 +65,8 @@ const ItemDropdownOptions = () => {
       >
         <MenuItem onClick={handleEdit}>
           <div className='option edit'>
-          <FontAwesomeIcon icon={faPenToSquare} />
-              <span>Edit</span>
+            <FontAwesomeIcon icon={faPenToSquare} />
+            <span>Edit</span>
           </div>
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
@@ -78,7 +78,11 @@ const ItemDropdownOptions = () => {
         </MenuItem>
       </Menu>
 
-      <EditLocation open={openEdit} onClose={handleEditClose} />
+      <EditLocation
+        location={location}
+        open={openEdit}
+        onClose={handleEditClose}
+      />
       <ConfirmDeleteDialog open={openDelete} onClose={handleDeleteClose} />
     </div>
   );

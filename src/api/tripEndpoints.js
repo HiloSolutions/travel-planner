@@ -8,8 +8,10 @@ const updateTripInDatabase = (inputs, id) => {
     });
 };
 
+
+//get data related to the trip itself (there can be many locations in one trip)
 const getTripData = (id) => {
-  return axios.get('http://localhost:8000/trip/',  {
+  return axios.get('http://localhost:8000/trip/', {
     params: { id }
   })
     .then((response) => {
@@ -17,15 +19,28 @@ const getTripData = (id) => {
     });
 };
 
+
+//get all location types available to choose from (not specific to user)
+const getLocationTypes = () => {
+  return axios.get('http://localhost:8000/trip/locationCategories/')
+    .then((response) => {
+      return response.data;
+    });
+}
+
+
+//get he locations saved by the user
 const getTripLocations = (id) => {
   return axios.get('http://localhost:8000/trip/locations/', {
     params: { id }
   })
-  .then((response) => {
-    return response.data;
-  })
+    .then((response) => {
+      return response.data;
+    })
 }
 
+
+//get list of all trips made by the user
 const getMyTrips = (sub) => {
   return axios.get('http://localhost:8000/trip/list', {
     params: { sub }
@@ -36,9 +51,10 @@ const getMyTrips = (sub) => {
 }
 
 
-export { 
-  updateTripInDatabase, 
+export {
+  updateTripInDatabase,
   getTripData,
   getTripLocations,
-  getMyTrips
+  getMyTrips,
+  getLocationTypes
 };
