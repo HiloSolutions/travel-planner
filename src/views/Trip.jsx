@@ -5,10 +5,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from 'react-router-dom';
 import Map from '../components/map-functionality/Map';
 import Nav from '../components/navigation/Nav';
+import LocationModal from '../components/widgets/LocationModal';
 import Form from '../components/widgets/Form';
 import Loading from '../components/Loading';
 import AlertBox from '../components/widgets/AlertBox';
 import Back from '../components/buttons/Back';
+
 import './Trip.css';
 
 
@@ -17,7 +19,6 @@ const Trip = () => {
   const { name, id } = useParams();
   const [tripValues, setTripValues] = useState(null);
   const [locations, setLocations] = useState(null);
-  const [sliderValue, setSliderValue] = useState(10);
 
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const Trip = () => {
       })
       .then((res) => {
         setLocations(res);
-        setSliderValue(res.zoom);
       })
       .catch((error) => {
         console.log(error)
@@ -46,7 +46,7 @@ const Trip = () => {
     return <Loading />;
   }
 
-  console.log(1, locations)
+
   return (
     isAuthenticated && (
       <>
@@ -56,31 +56,43 @@ const Trip = () => {
           <div className="card">
             <div className="card-smooth-caption">
               <Back />
-              <h5 className="card-title text-white">{name}</h5>
-              <h6 className="card-subtitle text-white">Alternative caption</h6>
+              <h5 className="card-title">{name}</h5>
+              <h6 className="card-subtitle">Alternative caption</h6>
             </div>
-            <Form
-              tripId={id}
-              tripValues={tripValues}
-              setTripValues={setTripValues}
-              sliderValue={sliderValue}
-            />
             {(!locations || locations.length < 1) && (
-              <AlertBox 
-              url='https://www.flaticon.com/free-icon/sightseeing_7051603?term=sightseeing&page=1&position=10&origin=search&related_id=7051603'
-              text='Time to pick some locations!'
+              <AlertBox
+                heading="No adventures planned... yet!"
+                message="Time to research some destinations."
+                id='plan-trip'
+                url=''
+                btnText="Build your Map"
               />
             )
             }
+            {(locations && locations.length >= 1) && (
+              <ul>
+              {locations.map((location, index) => (
+                <LocationModal key={index} location={location} />
+              ))}
+            </ul>
+            )
+            }
+            
+            {/* <Form
+              tripId={id}
+              tripValues={tripValues}
+              setTripValues={setTripValues}
+            /> */}
           </div>
+            
+            <Map
+              lat={tripValues.lat}
+              lng={tripValues.lng}
+              locations={locations}
+              setLocations={setLocations}
+            />
+      
 
-
-          <Map
-            lat={tripValues.lat}
-            lng={tripValues.lng}
-            zoom={sliderValue}
-            locations={locations}
-          />
         </div>
 
 

@@ -13,7 +13,6 @@ const NewTrip = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [places, setPlaces] = useState(null);
   
-  console.log(places);
   useEffect(() => {
     const result = getPlacesAPI();
     setPlaces(result);

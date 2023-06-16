@@ -13,7 +13,6 @@ const getTripData = (id) => {
     params: { id }
   })
     .then((response) => {
-      console.log(1, response.data)
       return response.data;
     });
 };
@@ -23,7 +22,6 @@ const getTripLocations = (id) => {
     params: { id }
   })
   .then((response) => {
-    console.log(0, response.data)
     return response.data;
   })
 }

@@ -9,7 +9,7 @@ const CustomMarker = ({location}) => {
   const lng = location.location_lng;
   const position = [lat, lng];
 
-  console.log(2, position)
+
   return (
     <Marker position={position}>
       <Popup>

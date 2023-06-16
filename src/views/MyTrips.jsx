@@ -9,6 +9,7 @@ import './MyTrips.css';
 
 
 
+
 const MyTrips = ({ trips }) => {
   const { isAuthenticated } = useAuth0();
 
@@ -16,7 +17,13 @@ const MyTrips = ({ trips }) => {
     return (
       <>
         <Nav />
-        <AlertBox url="/trips/new" text="Plan your trip" />
+        <AlertBox
+          heading="No trips planned... yet!"
+          message="Time to dust off your bags and start planning your next adventure."
+          id='my-trips'
+          url="/trips/new"
+          btnText="Plan your next trip"
+        />
       </>
     );
   }
@@ -28,7 +35,7 @@ const MyTrips = ({ trips }) => {
         <div className='trip-list'>
           <h1>My Trips</h1>
           <div className='layout-box'>
-            <ul className='layout-box-trip-list'>
+            <ul >
               {trips.map((trip, index) => (
                 <TripLink key={index} trip={trip} />
               ))}

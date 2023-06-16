@@ -2,6 +2,7 @@
 .trip-page-container {
 display: flex;
 }
+
 .card {
   flex: 1;
   display: flex;
@@ -10,6 +11,10 @@ display: flex;
   word-wrap: break-word;
   margin-bottom: 12px;
   color: #000;
+}
+
+.card-title, .card-subtitle {
+  color: #fff;
 }
 
 
@@ -30,3 +35,4 @@ display: flex;
 .card-smooth-caption h6 {
   font-size: 30px;
 }
+
