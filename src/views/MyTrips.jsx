@@ -23,6 +23,7 @@ const MyTrips = ({ trips }) => {
           id='my-trips'
           url="/trips/new"
           btnText="Plan your next trip"
+          btn={true}
         />
       </>
     );

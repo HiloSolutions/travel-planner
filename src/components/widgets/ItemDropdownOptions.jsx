@@ -1,63 +1,100 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Divider,
   Menu,
   MenuItem,
 } from '@mui/material';
-import ConfirmDeleteDialog from '../widgets/ConfirmDelete';
-import EditLocation from '../widgets/EditLocation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsis,
   faTrashCan,
   faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
+import ConfirmDeleteDialog from '../widgets/ConfirmDelete';
+import EditLocation from '../widgets/EditLocation';
+import { deleteLocation } from '../../api/locationEndpoints';
 import './ItemDropdownOptions.css';
 
-const ItemDropdownOptions = ({ location }) => {
-  const [openDelete, setOpenDelete] = React.useState(false);
-  const [openEdit, setOpenEdit] = React.useState(false);
-  const [anchorMenu, setAnchorMenu] = React.useState(null);
 
 
+
+const ItemDropdownOptions = ({
+  location,
+  savedLocations,
+  updateList
+}) => {
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [anchorMenu, setAnchorMenu] = useState(null);
+
+
+  const deleteLocatonById = () => {
+    return savedLocations.filter(loc => loc.id !== location.id);
+  }
+
+  const removeItemById = () => {
+    const newLocations = deleteLocatonById();
+    console.log(2, newLocations.length, newLocations)
+
+    updateList(newLocations);
+  };
+
+
+  //Close the modal, update db, then refresh LocationList once successful to reflect the new locations
+  const handleDeleteConfirmation = async () => {
+    try {
+      setOpenDelete(false);
+      console.log(1, savedLocations.length);
+      await deleteLocation(location.trip_id, location.id);
+      removeItemById();
+    } catch (error) {
+      console.error('Error at handleDeleteConfirmation:', error);
+    }
+  };
+  //show dropdown menu options
   const handleDropdownClick = (event) => {
     setAnchorMenu(event.currentTarget);
   };
 
+
+  //close the delete confirmation modal
   const handleDeleteClose = () => {
     setOpenDelete(false);
   };
 
+
+  //if delete button is clicked, a confirmation modal appears.
   const handleDelete = () => {
     setOpenDelete(true);
     setAnchorMenu(null);
   };
 
+
+  //close the edit modal
   const handleEditClose = () => {
     setOpenEdit(false);
   };
 
+
+  //if edit button is clicked, a location edit modal appears.
   const handleEdit = () => {
     setOpenEdit(true);
     setAnchorMenu(null);
   };
+
 
   return (
     <div>
       <Button
         onClick={handleDropdownClick}
         className='ellipsis-dropdown-container'
+        style={{ backgroundColor: 'transparent' }}
       >
         <div className='location-list-controls'>
           <FontAwesomeIcon className='fa-menu' icon={faEllipsis} />
         </div>
       </Button>
-
       <Menu
         anchorEl={anchorMenu}
         open={Boolean(anchorMenu)}
@@ -77,13 +114,19 @@ const ItemDropdownOptions = ({ location }) => {
           </div>
         </MenuItem>
       </Menu>
-
       <EditLocation
         location={location}
         open={openEdit}
         onClose={handleEditClose}
       />
-      <ConfirmDeleteDialog open={openDelete} onClose={handleDeleteClose} />
+      <ConfirmDeleteDialog
+        open={openDelete}
+        onClose={handleDeleteClose}
+        onDelete={handleDeleteConfirmation}
+        location={location}
+        savedLocations={savedLocations}
+        updateList={updateList}
+      />
     </div>
   );
 };

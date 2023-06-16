@@ -1,14 +1,22 @@
+.list-item {
+  width: 100%;
+}
+
 .location-list {
   padding: 3rem 6rem 5rem 6rem;
   overflow: hidden;
   width: 100%;
-  padding: 3rem 6rem;
   font-family: 'Roboto', sans-serif;
 }
 
 .layout-box {
   display: flex;
   justify-content: space-between;
+}
+
+.location-flex {
+  display: flex;
+  gap: 1rem;
 }
 
 
@@ -39,7 +47,8 @@
   display: flex;
   gap: 2rem;
   align-items: center;
-  padding: 1rem;
+  justify-content: space-between;
+  padding: 2rem;
   border-bottom: 1px solid #DCE0E0;
   cursor: pointer;
 }
@@ -74,7 +83,7 @@
 }
 
 .location-list-controls .fa-menu:hover {
-  border: 3px solid #25CAAC;
+  border: 2px solid #25CAAC;
   color: #25CAAC;
 }
 

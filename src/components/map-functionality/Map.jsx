@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import './Map.css';
+import { addLocationToDb } from '../../api/locationEndpoints';
 import CustomMarker from './CustomMarker';
 
 
@@ -26,8 +27,9 @@ const Map = ({
       location_name: 'Untitled Location',
       location_type_category: 'noCategory',
       location_type_name: 'No Category',
-      key: new Date().getTime() // Generate a unique ID for each marker
+      id: new Date().getTime() // Generate a unique ID for each marker
     };
+    addLocationToDb(newLocation);
     setLocations(prevLocations => [...prevLocations, newLocation]);
   };
 

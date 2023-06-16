@@ -10,7 +10,8 @@ const AlertBox = ({
   message,
   id,
   url,
-  btnText
+  btnText,
+  btn
 }) => {
 
   return (
@@ -19,11 +20,13 @@ const AlertBox = ({
         <img alt='Attention!' src={wavingHand}></img>
         <h2>{heading}</h2>
         <p>{message}</p>
+        {btn && (
+          <CTAButton
+            url={url}
+            text={btnText}
+          />
+        )}
 
-        <CTAButton
-          url={url}
-          text={btnText}
-        />
       </div>
       <div className='right' id={id}></div>
     </div>

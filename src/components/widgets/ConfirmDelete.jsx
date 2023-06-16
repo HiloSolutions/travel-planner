@@ -7,7 +7,7 @@ import {
   Button,
 } from '@mui/material';
 
-const ConfirmDeleteDialog = ({ open, onClose }) => {
+const ConfirmDeleteDialog = ({ open, onClose, onDelete }) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Confirm Delete</DialogTitle>
@@ -18,7 +18,7 @@ const ConfirmDeleteDialog = ({ open, onClose }) => {
         <Button onClick={onClose} variant="contained">
           Go Back
         </Button>
-        <Button onClick={onClose} color="error" variant="outlined">
+        <Button onClick={onDelete} color="error" variant="outlined">
           Delete
         </Button>
       </DialogActions>

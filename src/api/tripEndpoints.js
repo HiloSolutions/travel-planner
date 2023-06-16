@@ -20,25 +20,6 @@ const getTripData = (id) => {
 };
 
 
-//get all location types available to choose from (not specific to user)
-const getLocationTypes = () => {
-  return axios.get('http://localhost:8000/trip/locationCategories/')
-    .then((response) => {
-      return response.data;
-    });
-}
-
-
-//get he locations saved by the user
-const getTripLocations = (id) => {
-  return axios.get('http://localhost:8000/trip/locations/', {
-    params: { id }
-  })
-    .then((response) => {
-      return response.data;
-    })
-}
-
 
 //get list of all trips made by the user
 const getMyTrips = (sub) => {
@@ -54,7 +35,5 @@ const getMyTrips = (sub) => {
 export {
   updateTripInDatabase,
   getTripData,
-  getTripLocations,
-  getMyTrips,
-  getLocationTypes
+  getMyTrips
 };

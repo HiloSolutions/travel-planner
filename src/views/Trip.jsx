@@ -1,9 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import {
-  getTripData,
-  getTripLocations
-} from '../api/tripEndpoints';
+import { getTripData } from '../api/tripEndpoints';
+import { getTripLocations } from '../api/locationEndpoints';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from 'react-router-dom';
 import Map from '../components/map-functionality/Map';
@@ -13,8 +11,6 @@ import Form from '../components/widgets/Form';
 import Loading from '../components/Loading';
 import AlertBox from '../components/widgets/AlertBox';
 import Back from '../components/buttons/Back';
-import { getLocationTypes } from '../api/tripEndpoints';
-
 import './Trip.css';
 
 
@@ -24,6 +20,11 @@ const Trip = () => {
   const [tripValues, setTripValues] = useState(null);
   const [savedLocations, setSavedLocations] = useState(null);
 
+  //set saved locations on delete in child
+  const updateList = (newSavedLocations) => {
+    console.log(1, newSavedLocations.length);
+    setSavedLocations(newSavedLocations);
+  };
 
   //get information from the database that is relevant to the user
   useEffect(() => {
@@ -39,6 +40,7 @@ const Trip = () => {
         return getTripLocations(id);
       })
       .then((res) => {
+        console.log(1);
         setSavedLocations(res);
       })
       .catch((error) => {
@@ -46,7 +48,7 @@ const Trip = () => {
       });
   }, [id]);
 
-
+  
 
   if (isLoading || !tripValues) {
     return <Loading />;
@@ -68,19 +70,21 @@ const Trip = () => {
             {(!savedLocations || savedLocations.length < 1) && (
               <AlertBox
                 heading="No adventures planned... yet!"
-                message="Time to research some destinations."
+                message="Click anywhere on the map to add your first destination."
                 id='plan-trip'
                 url=''
-                btnText="Build your Map"
+                btn={false}
               />
             )
             }
             {(savedLocations && savedLocations.length >= 1) && (
-              <ul>
+              <ul className='location-list'>
                 {savedLocations.map((e, i) => (
                   <LocationList
                     key={i}
                     location={e}
+                    savedLocations={savedLocations}
+                    updateList={updateList}
                   />
                 ))}
               </ul>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Loading from '../Loading';
-import { getLocationTypes } from '../../api/tripEndpoints';
+import { getLocationTypes } from '../../api/locationEndpoints';
 import {
   DialogActions,
   InputLabel,
@@ -38,7 +38,7 @@ const EditLocation = ({
     return <Loading />;
   }
 
-  
+
   return (
     <Dialog
       open={open}
