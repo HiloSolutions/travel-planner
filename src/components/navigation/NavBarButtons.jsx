@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import LoginButton from '../buttons/LoginButton';
 import LogoutButton from '../buttons/LogoutButton';
 import SignupButton from '../buttons/SignupButton';
-import StyledMenu from './StyledMenu';
+import StyledMenu from '../widgets/StyledMenu';
 import Divider from '@mui/material/Divider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
