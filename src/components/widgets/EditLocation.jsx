@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Loading from '../Loading';
 import { getLocationTypes } from '../../api/locationEndpoints';
 import {
@@ -10,15 +10,18 @@ import {
   FormControl,
   Select,
   MenuItem,
-  Avatar,
   TextField,
   Box
 } from '@mui/material';
 import './EditLocation.css';
+import airplane from '../../images/airplane.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 
-const EditLocation = ({ 
-  open, 
+
+const EditLocation = ({
+  open,
   onClose,
   location
 }) => {
@@ -32,7 +35,7 @@ const EditLocation = ({
         setLocationTypes(res);
       })
   }, []);
-  
+
 
   if (!locationTypes) {
     return <Loading />;
@@ -44,11 +47,19 @@ const EditLocation = ({
       open={open}
       onClose={onClose}
       className='dialog-container'
+      PaperProps={{
+        style: {
+          width: '50%',
+        }
+      }}
     >
       <DialogContent>
 
-        <div>
-          <Avatar className="profile-avatar" alt="User avatar" src="https://bootdey.com/img/Content/avatar/avatar6.png" />
+        <div className="image-container">
+          <img src={airplane} alt="Cover" />
+          <div className="edit-icon">
+            <FontAwesomeIcon icon={faEdit} />
+          </div>
         </div>
 
         <Box
@@ -58,45 +69,54 @@ const EditLocation = ({
             display: 'flex',
             flexDirection: 'column',
             m: 'auto',
-            width: 'fit-content',
+            width: '100%',
           }}
         >
           {/* Name of location */}
           <InputLabel
-            sx={{ fontWeight: "medium", width: "20%" }}
+            sx={{ fontWeight: "medium", width: "100%" }}
             className="mt-3"
           >
-            {location.location_name}
+            Location Name
           </InputLabel>
           <TextField
             defaultValue={location.location_name}
             className='text-field'
             name="location-name"
             type="text"
+            sx={{ width: "100%" }}
           />
 
           {/* Address */}
           <InputLabel
-            sx={{ fontWeight: "medium", width: "20%" }}
+            sx={{ fontWeight: "medium", width: "100%" }}
             className="mt-3"
           >
-            {location.location_lat},{location.location_lng}
+            Address
           </InputLabel>
           <TextField
             defaultValue={[location.location_lat, location.location_lng]}
             className='text-field'
             name="location-name"
             type="text"
+            sx={{ width: "100%" }}
           />
 
 
           {/* Select category */}
+          <InputLabel
+            sx={{ fontWeight: "medium", width: "100%" }}
+            className="mt-3"
+          >
+            Tags
+          </InputLabel>
           <FormControl sx={{ mt: 2, minWidth: 120 }}>
             <InputLabel htmlFor="max-width">Select Category</InputLabel>
             <Select
               autoFocus
               label="category"
               value={location.location_type_category}
+              sx={{ width: "100%" }}
             >
               {locationTypes.map((e, i) => (
                 <MenuItem
