@@ -6,6 +6,7 @@ import './LocationModal.css';
 
 const LocationList = ({
   location,
+  setSavedLocations,
   savedLocations,
   updateList
 }) => {
@@ -68,6 +69,7 @@ const LocationList = ({
         <ItemDropdownOptions
           location={location}
           savedLocations={savedLocations}
+          setSavedLocations={setSavedLocations}
           updateList={updateList}
         />
       </div>

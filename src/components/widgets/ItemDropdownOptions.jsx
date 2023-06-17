@@ -22,6 +22,7 @@ import './ItemDropdownOptions.css';
 const ItemDropdownOptions = ({
   location,
   savedLocations,
+  setSavedLocations,
   updateList
 }) => {
   const [openDelete, setOpenDelete] = useState(false);
@@ -35,8 +36,6 @@ const ItemDropdownOptions = ({
 
   const removeItemById = () => {
     const newLocations = deleteLocatonById();
-    console.log(2, newLocations.length, newLocations)
-
     updateList(newLocations);
   };
 
@@ -45,7 +44,6 @@ const ItemDropdownOptions = ({
   const handleDeleteConfirmation = async () => {
     try {
       setOpenDelete(false);
-      console.log(1, savedLocations.length);
       await deleteLocation(location.trip_id, location.id);
       removeItemById();
     } catch (error) {
@@ -117,6 +115,8 @@ const ItemDropdownOptions = ({
       </Menu>
       <EditLocation
         location={location}
+        savedLocations={savedLocations}
+        setSavedLocations={setSavedLocations}
         open={openEdit}
         onClose={handleEditClose}
       />

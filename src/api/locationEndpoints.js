@@ -39,9 +39,20 @@ const addLocationToDb = (locationId, tripId, sub) => {
   });
 }
 
+
+//add location to db
+const editLocationInDb = (location) => {
+  return axios.post('http://localhost:8000/location/edit', { location })
+  .then((response) => {
+    console.log('database updated with edited location')
+    return response.data;
+  });
+}
+
 export {
   getTripLocations,
   getLocationTypes,
   deleteLocation,
-  addLocationToDb
+  addLocationToDb,
+  editLocationInDb
 };

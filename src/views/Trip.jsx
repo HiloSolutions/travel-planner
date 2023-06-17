@@ -84,6 +84,7 @@ const Trip = () => {
                     key={i}
                     location={e}
                     savedLocations={savedLocations}
+                    setSavedLocations={setSavedLocations}
                     updateList={updateList}
                   />
                 ))}

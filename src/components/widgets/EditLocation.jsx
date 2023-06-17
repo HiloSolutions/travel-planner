@@ -22,12 +22,16 @@ import EditPictureButton from '../buttons/EditPictureButton';
 const EditLocation = ({
   open,
   onClose,
+  setSavedLocations,
+  savedLocations,
   location
 }) => {
 
   //states
   const [locationTypes, setLocationTypes] = useState(null);
   const [isFormDirty, setIsFormDirty] = useState(false);
+  const [newName, setNewName] = useState(null);
+  const [newCategory, setNewCategory] = useState(null);
 
 
   //data fetching
@@ -40,15 +44,45 @@ const EditLocation = ({
 
 
   //methods
-  const handleFormChange = () => {
+  const handleNameChange = (e) => {
+    setNewName(e.target.value);
     setIsFormDirty(true);
   };
 
-  const handleSaveClick = () => {
-    // Save the form data
-    // ...
+  const handleCategoryChange = (e) => {
+    setNewCategory(e.target.value);
+    setIsFormDirty(true);
+  };
 
-    // Close the dialog
+  const replaceObjectById = (newObj) => {
+    return savedLocations.map((item) => {
+      if (item.id === location.id) {
+        return newObj;
+      }
+      return item;
+    });
+  };
+
+  
+  //submit new values to the database and update savedLocations state
+  const handleSaveClick = () => {
+     const location_name = newName || location.location_name;
+     const category = newCategory || location.location_type_category;
+    const id = location.id;
+
+    const editedLocation = {
+      id,
+      trip_id: location.trip_id,
+      location_name,
+      location_lat: location.location_lat,
+      location_lng: location.location_lng,
+      category
+    }
+
+    const updatedState = replaceObjectById(editedLocation)
+
+    setSavedLocations(updatedState);
+
     onClose();
   };
 
@@ -90,7 +124,7 @@ const EditLocation = ({
 
         <div className="image-container">
           <img src={locationImage} alt="Cover" />
-          <EditPictureButton picture={locationImage}/>
+          <EditPictureButton picture={locationImage} />
         </div>
 
         <Box
@@ -112,7 +146,7 @@ const EditLocation = ({
             variant='filled'
             size="small"
             InputProps={inputProps}
-            onChange={handleFormChange}
+            onChange={(e) => handleNameChange(e)}
           />
 
 
@@ -126,7 +160,6 @@ const EditLocation = ({
             variant='filled'
             size="small"
             InputProps={inputProps}
-            onChange={handleFormChange}
           />
 
 
@@ -141,7 +174,7 @@ const EditLocation = ({
               size='small'
               value={location.location_type_category}
               sx={{ fontSize: 14.6 }}
-              onChange={handleFormChange}
+              onChange={(e) => handleCategoryChange(e)}
             >
               {locationTypes.map((e, i) => (
                 <MenuItem
@@ -168,7 +201,7 @@ const EditLocation = ({
           Go Back
         </Button>
         <Button
-          onClick={onClose}
+          onClick={handleSaveClick}
           variant="contained"
           size='large'
           sx={{ width: '50%' }}
