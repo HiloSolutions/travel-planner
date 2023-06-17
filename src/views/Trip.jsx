@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 import Map from '../components/map-functionality/Map';
 import Nav from '../components/navigation/Nav';
 import LocationList from '../components/widgets/LocationList';
-import Form from '../components/widgets/Form';
 import Loading from '../components/Loading';
 import AlertBox from '../components/widgets/AlertBox';
 import Back from '../components/buttons/Back';
@@ -81,24 +80,22 @@ const Trip = () => {
             }
             {(savedLocations && savedLocations.length >= 1) && (
               <ul className='location-list'>
-                {savedLocations.map((e, i) => (
-                  <LocationList
-                    key={shortid.generate()}
-                    location={e}
-                    savedLocations={savedLocations}
-                    setSavedLocations={setSavedLocations}
-                    updateList={updateList}
-                  />
-                ))}
+                {savedLocations.map((e) => {
+                  console.log(e);
+                  return (
+                    <LocationList
+                      key={shortid.generate()}
+                      location={e}
+                      savedLocations={savedLocations}
+                      setSavedLocations={setSavedLocations}
+                      updateList={updateList}
+                    />
+                  )
+                })}
               </ul>
             )
             }
 
-            {/* <Form
-              tripId={id}
-              tripValues={tripValues}
-              setTripValues={setTripValues}
-            /> */}
           </div>
           <Map
             lat={tripValues.lat}

@@ -6,6 +6,7 @@ import Nav from '../components/navigation/Nav';
 import Map from '../components/map-functionality/Map';
 import AlertBox from '../components/widgets/AlertBox';
 import './MyTrips.css';
+import shortid from 'shortid';
 
 
 
@@ -38,7 +39,7 @@ const MyTrips = ({ trips }) => {
           <div className='layout-box'>
             <ul >
               {trips.map((trip, index) => (
-                <TripLink key={index} trip={trip} />
+                <TripLink key={shortid.generate()} trip={trip} />
               ))}
             </ul>
             <Map lat={53.6539} lng={-113.6293} />
