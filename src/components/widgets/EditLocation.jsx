@@ -16,23 +16,22 @@ import {
 import './EditLocation.css';
 import locationImage from '../../images/location.png';
 import EditPictureButton from '../buttons/EditPictureButton';
-import { editLocationInDb } from '../../api/locationEndpoints';
+
 
 
 
 const EditLocation = ({
   open,
   onClose,
-  setSavedLocations,
-  savedLocations,
-  location
+  location,
+  onSave
 }) => {
 
   //states
   const [locationTypes, setLocationTypes] = useState(null);
   const [isFormDirty, setIsFormDirty] = useState(false);
   const [newName, setNewName] = useState(null);
-  const [newCategory, setNewCategory] = useState(null);
+  const [newCategory, setNewCategory] = useState('');
 
 
   //data fetching
@@ -55,20 +54,10 @@ const EditLocation = ({
     setIsFormDirty(true);
   };
 
-  const replaceObjectById = (newObj) => {
-    return savedLocations.map((item) => {
-      if (item.id === location.id) {
-        return newObj;
-      }
-      return item;
-    });
-  };
-
-
   //submit new values to the database and update savedLocations state
   const handleSaveClick = () => {
-     const location_name = newName || location.location_name;
-     const category = newCategory || location.location_type_category;
+    const location_name = newName || location.location_name;
+    const category = newCategory || location.location_type_category;
     const id = location.id;
 
     const editedLocation = {
@@ -80,17 +69,11 @@ const EditLocation = ({
       category
     }
 
-    const updatedState = replaceObjectById(editedLocation)
+    console.log('1: handleSaveClick', Number(location.location_lat), location.location_lat)
+    //calls function to update db and state in parent - so delete and edit logic happens at the same level (easier for me to read)
+    onSave(editedLocation);
 
-    editLocationInDb(editedLocation)
-    .then(() => {
-      setSavedLocations(updatedState);
-      onClose();
-    })
-    .catch((err) => {
-      console.error('uh-oh');
-    })
-  };
+  }
 
   //variables
   const inputProps = {
@@ -177,19 +160,19 @@ const EditLocation = ({
               autoFocus
               label="category"
               variant='filled'
+              defaultValue=''
               size='small'
-              value={location.location_type_category}
               sx={{ fontSize: 14.6 }}
               onChange={(e) => handleCategoryChange(e)}
             >
-              {locationTypes.map((e, i) => (
-                <MenuItem
-                  value={e.location_type_category}
-                  key={i}
-                >
-                  {e.location_type_name}
-                </MenuItem>
-              ))}
+              {locationTypes.map((e, i) => {
+    
+                return (
+                  <MenuItem value={e.location_type_category} key={i}>
+                    {e.location_type_name}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
 

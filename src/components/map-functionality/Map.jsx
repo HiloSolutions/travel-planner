@@ -23,7 +23,7 @@ const Map = ({
   tripId
 }) => {
   const { user } = useAuth0();
-console.log('locations', locations)
+
   const mapClicked = (e) => {
     const newLocation = {
       location_lat: e.latlng.lat,
@@ -33,11 +33,12 @@ console.log('locations', locations)
       location_type_name: 'No Category',
       id: new Date().getTime() // Generate a unique ID for each marker
     };
+
+    
     addLocationToDb(newLocation, tripId, user.sub);
     setLocations(prevLocations => [...prevLocations, newLocation]);
   };
 
-  
 
   return (
     <>

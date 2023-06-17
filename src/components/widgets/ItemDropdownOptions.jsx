@@ -12,6 +12,7 @@ import {
   faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
 import ConfirmDeleteDialog from '../widgets/ConfirmDelete';
+import { editLocationInDb } from '../../api/locationEndpoints';
 import EditLocation from '../widgets/EditLocation';
 import { deleteLocation } from '../../api/locationEndpoints';
 import './ItemDropdownOptions.css';
@@ -30,12 +31,20 @@ const ItemDropdownOptions = ({
   const [anchorMenu, setAnchorMenu] = useState(null);
 
 
-  const deleteLocatonById = () => {
-    return savedLocations.filter(loc => loc.id !== location.id);
-  }
+  const removeItemById = (id) => {
+    const newLocations = savedLocations.filter(loc => loc.id !== id);
+    updateList(newLocations);
+  };
 
-  const removeItemById = () => {
-    const newLocations = deleteLocatonById();
+
+  const replaceItemById = (editedLocation) => {
+    const newLocations = savedLocations.map((loc) => {
+      if (loc.id === editedLocation.id) {
+        return { ...editedLocation };
+      }
+      return loc;
+    });
+  
     updateList(newLocations);
   };
 
@@ -45,11 +54,13 @@ const ItemDropdownOptions = ({
     try {
       setOpenDelete(false);
       await deleteLocation(location.trip_id, location.id);
-      removeItemById();
+      removeItemById(location.id);
     } catch (error) {
       console.error('Error at handleDeleteConfirmation:', error);
     }
   };
+
+
   //show dropdown menu options
   const handleDropdownClick = (event) => {
     setAnchorMenu(event.currentTarget);
@@ -79,6 +90,17 @@ const ItemDropdownOptions = ({
   const handleEdit = () => {
     setOpenEdit(true);
     setAnchorMenu(null);
+  };
+
+  //Close the modal, update db, then refresh LocationList once successful to reflect the new locations
+  const handleEditConfirmation = async (editedLocation) => {
+    try {
+      setOpenEdit(false);
+      await editLocationInDb(editedLocation);
+      replaceItemById(editedLocation);
+    } catch (error) {
+      console.error('Error at handleEditConfirmation:', error);
+    }
   };
 
 
@@ -114,19 +136,15 @@ const ItemDropdownOptions = ({
         </MenuItem>
       </Menu>
       <EditLocation
-        location={location}
-        savedLocations={savedLocations}
-        setSavedLocations={setSavedLocations}
+        onSave={handleEditConfirmation}
         open={openEdit}
         onClose={handleEditClose}
+        location={location}
       />
       <ConfirmDeleteDialog
         open={openDelete}
         onClose={handleDeleteClose}
         onDelete={handleDeleteConfirmation}
-        location={location}
-        savedLocations={savedLocations}
-        updateList={updateList}
       />
     </div>
   );

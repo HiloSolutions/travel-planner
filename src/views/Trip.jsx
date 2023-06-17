@@ -12,6 +12,7 @@ import Loading from '../components/Loading';
 import AlertBox from '../components/widgets/AlertBox';
 import Back from '../components/buttons/Back';
 import './Trip.css';
+import shortid from 'shortid';
 
 
 const Trip = () => {
@@ -22,7 +23,7 @@ const Trip = () => {
 
   //set saved locations on delete in child
   const updateList = (newSavedLocations) => {
-    console.log(1, newSavedLocations.length);
+    console.log(newSavedLocations);
     setSavedLocations(newSavedLocations);
   };
 
@@ -40,7 +41,6 @@ const Trip = () => {
         return getTripLocations(id);
       })
       .then((res) => {
-        console.log(1);
         setSavedLocations(res);
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ const Trip = () => {
       });
   }, [id]);
 
-  
+
 
   if (isLoading || !tripValues) {
     return <Loading />;
@@ -63,9 +63,11 @@ const Trip = () => {
 
           <div className="card">
             <div className="card-smooth-caption">
-              <Back />
-              <h5 className="card-title">{name}</h5>
-              <h6 className="card-subtitle">Alternative caption</h6>
+              <div className="content-wrapper">
+                <Back />
+                <h5 className="card-title">{name}</h5>
+                <h6 className="card-subtitle">Alternative caption</h6>
+              </div>
             </div>
             {(!savedLocations || savedLocations.length < 1) && (
               <AlertBox
@@ -81,7 +83,7 @@ const Trip = () => {
               <ul className='location-list'>
                 {savedLocations.map((e, i) => (
                   <LocationList
-                    key={i}
+                    key={shortid.generate()}
                     location={e}
                     savedLocations={savedLocations}
                     setSavedLocations={setSavedLocations}
@@ -98,7 +100,6 @@ const Trip = () => {
               setTripValues={setTripValues}
             /> */}
           </div>
-
           <Map
             lat={tripValues.lat}
             lng={tripValues.lng}

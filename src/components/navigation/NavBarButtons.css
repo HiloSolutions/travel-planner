@@ -2,24 +2,20 @@
 #dropdown-button {
   background-color: #fff;
   border-radius: 50px;
-  max-width: 10rem;
+  width: 70px;
   padding-left: 3rem;
   display: flex;
   align-items: center;
-  height: 49px;
-}
-
-#dropdown-button:hover {
-  box-shadow: rgba(37, 202, 172, 0.7) 0px 0px 0px 3px;
+  height: 34px;
 }
 
 
 #nav-profile-picture {
-  min-width: 45px;
-  height: 45px;
-  background-color: #717171;
+  min-width: 30px;
+  height: 30px;
+  background-color: #c3c3c3;
   border-radius: 50%;
-  margin-left: 1rem;
+  margin-left: 5px;
 }
 
 #nav-profile-picture img {
@@ -34,4 +30,5 @@
 
 .hamburger-menu {
   color: #183052;
+  font-size: 7px;
 }
