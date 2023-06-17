@@ -16,6 +16,7 @@ import {
 import './EditLocation.css';
 import locationImage from '../../images/location.png';
 import EditPictureButton from '../buttons/EditPictureButton';
+import { editLocationInDb } from '../../api/locationEndpoints';
 
 
 
@@ -63,7 +64,7 @@ const EditLocation = ({
     });
   };
 
-  
+
   //submit new values to the database and update savedLocations state
   const handleSaveClick = () => {
      const location_name = newName || location.location_name;
@@ -81,9 +82,14 @@ const EditLocation = ({
 
     const updatedState = replaceObjectById(editedLocation)
 
-    setSavedLocations(updatedState);
-
-    onClose();
+    editLocationInDb(editedLocation)
+    .then(() => {
+      setSavedLocations(updatedState);
+      onClose();
+    })
+    .catch((err) => {
+      console.error('uh-oh');
+    })
   };
 
   //variables
