@@ -21,9 +21,6 @@ const CustomMarker = ({ location }) => {
     if (category === 'nightlife' || category === 'foodAndDrink'){
       return '2x-violet';
     }
-    if (category === 'nightlife' || category === 'foodAndDrink'){
-      return '2x-violet';
-    }
     if (category === 'pointOfCuriosity') {
       return '2x-blue'
     }

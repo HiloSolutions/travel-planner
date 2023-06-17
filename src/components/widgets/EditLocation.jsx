@@ -14,9 +14,8 @@ import {
   Box
 } from '@mui/material';
 import './EditLocation.css';
-import airplane from '../../images/airplane.jpg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import locationImage from '../../images/location.png';
+import EditPictureButton from '../buttons/EditPictureButton';
 
 
 
@@ -26,9 +25,12 @@ const EditLocation = ({
   location
 }) => {
 
+  //states
   const [locationTypes, setLocationTypes] = useState(null);
+  const [isFormDirty, setIsFormDirty] = useState(false);
 
-  //get information from the dtatabase that is relevant to all users
+
+  //data fetching
   useEffect(() => {
     getLocationTypes()
       .then((res) => {
@@ -37,11 +39,42 @@ const EditLocation = ({
   }, []);
 
 
+  //methods
+  const handleFormChange = () => {
+    setIsFormDirty(true);
+  };
+
+  const handleSaveClick = () => {
+    // Save the form data
+    // ...
+
+    // Close the dialog
+    onClose();
+  };
+
+  //variables
+  const inputProps = {
+    style: {
+      fontSize: 14.6,
+      width: "100%"
+    },
+  };
+
+  const labelStyle = {
+    fontWeight: "medium",
+    width: "100%",
+    fontSize: '16px',
+    marginTop: '15px'
+  };
+
+
+  //conditions
   if (!locationTypes) {
     return <Loading />;
   }
 
 
+  //return value
   return (
     <Dialog
       open={open}
@@ -56,10 +89,8 @@ const EditLocation = ({
       <DialogContent>
 
         <div className="image-container">
-          <img src={airplane} alt="Cover" />
-          <div className="edit-icon">
-            <FontAwesomeIcon icon={faEdit} />
-          </div>
+          <img src={locationImage} alt="Cover" />
+          <EditPictureButton picture={locationImage}/>
         </div>
 
         <Box
@@ -68,55 +99,49 @@ const EditLocation = ({
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            m: 'auto',
             width: '100%',
           }}
         >
           {/* Name of location */}
-          <InputLabel
-            sx={{ fontWeight: "medium", width: "100%" }}
-            className="mt-3"
-          >
-            Location Name
-          </InputLabel>
+          <InputLabel sx={labelStyle}>Location Name</InputLabel>
           <TextField
             defaultValue={location.location_name}
             className='text-field'
             name="location-name"
             type="text"
-            sx={{ width: "100%" }}
+            variant='filled'
+            size="small"
+            InputProps={inputProps}
+            onChange={handleFormChange}
           />
 
+
           {/* Address */}
-          <InputLabel
-            sx={{ fontWeight: "medium", width: "100%" }}
-            className="mt-3"
-          >
-            Address
-          </InputLabel>
+          <InputLabel sx={labelStyle}>Address</InputLabel>
           <TextField
             defaultValue={[location.location_lat, location.location_lng]}
             className='text-field'
             name="location-name"
             type="text"
-            sx={{ width: "100%" }}
+            variant='filled'
+            size="small"
+            InputProps={inputProps}
+            onChange={handleFormChange}
           />
 
 
           {/* Select category */}
-          <InputLabel
-            sx={{ fontWeight: "medium", width: "100%" }}
-            className="mt-3"
-          >
-            Tags
-          </InputLabel>
+          <InputLabel sx={labelStyle}>Tags</InputLabel>
           <FormControl sx={{ mt: 2, minWidth: 120 }}>
             <InputLabel htmlFor="max-width">Select Category</InputLabel>
             <Select
               autoFocus
               label="category"
+              variant='filled'
+              size='small'
               value={location.location_type_category}
-              sx={{ width: "100%" }}
+              sx={{ fontSize: 14.6 }}
+              onChange={handleFormChange}
             >
               {locationTypes.map((e, i) => (
                 <MenuItem
@@ -134,10 +159,22 @@ const EditLocation = ({
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} variant="outlined">
+        <Button
+          onClick={onClose}
+          variant="outlined"
+          size='large'
+          sx={{ width: '50%' }}
+        >
           Go Back
         </Button>
-        <Button onClick={onClose} color="primary" variant="contained">
+        <Button
+          onClick={onClose}
+          variant="contained"
+          size='large'
+          sx={{ width: '50%' }}
+          disabled={!isFormDirty}
+          disableElevation
+        >
           Save
         </Button>
       </DialogActions>

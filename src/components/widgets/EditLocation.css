@@ -12,18 +12,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 400px;
-  max-height: 400px;
+  max-width: 300px;
+  max-height: 300px;
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .image-container img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .edit-icon {
@@ -31,7 +32,7 @@
   bottom: 10px;
   right: 10px;
   color: white;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   padding: 5px;
   border-radius: 3px;
   cursor: pointer;

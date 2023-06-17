@@ -83,8 +83,7 @@
 }
 
 .location-list-controls .fa-menu:hover {
-  border: 2px solid #25CAAC;
-  color: #25CAAC;
+  border: 1px solid #183153;
 }
 
 .hovered {

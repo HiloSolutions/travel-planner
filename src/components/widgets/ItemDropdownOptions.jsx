@@ -90,6 +90,7 @@ const ItemDropdownOptions = ({
         onClick={handleDropdownClick}
         className='ellipsis-dropdown-container'
         style={{ backgroundColor: 'transparent' }}
+        disableRipple
       >
         <div className='location-list-controls'>
           <FontAwesomeIcon className='fa-menu' icon={faEllipsis} />

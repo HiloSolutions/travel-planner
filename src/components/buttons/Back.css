@@ -1,14 +1,15 @@
 .back-button {
- background-color: transparent;
+  background-color: transparent;
 }
+
 .fa-back-arrow {
   padding: 8px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: none;
-  background: #25CAAC;
-  color: white;
+  background: #fff;
+  color: #343a40;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
