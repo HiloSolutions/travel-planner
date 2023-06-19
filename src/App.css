@@ -1,15 +1,14 @@
-
 * {
   box-sizing: border-box;
   font-family: 'Noto Sans', sans-serif;
-  
+
 
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
@@ -23,7 +22,8 @@
 }
 
 html {
-  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+  font-size: 62.5%;
+  /* (62.5/100) * 16px = 10px */
 }
 
 img {
@@ -38,13 +38,13 @@ button:focus {
 menu,
 ol,
 ul {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 
 article ol,
 article ul {
-    list-style-position: inside;
+  list-style-position: inside;
 }
 
 
@@ -55,12 +55,32 @@ summary,
 [type=radio],
 [type=submit],
 [type=checkbox] {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+
+p {
+  font-size: 16px;
+  color: #777;
+  line-height: 20px;
+  font-weight: 300;
+  letter-spacing: 0.4px;
 }
 
 
 @media (prefers-reduced-motion: no-preference) {
   html {
-        scroll-behavior: smooth;
+    scroll-behavior: smooth;
   }
 }

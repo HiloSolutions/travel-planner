@@ -45,18 +45,6 @@
 }
 
 
-.trip-list-item h3 {
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.trip-list-item p {
-  font-size: 18px;
-  color: #7c7c7c;
-  line-height: 20px;
-  font-weight: 300;
-}
-
 .trip-list img {
   width: 150px;
   border-radius: 1rem;

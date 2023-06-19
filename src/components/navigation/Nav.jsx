@@ -31,9 +31,7 @@ const Nav = ({navSearch}) => {
                   <li>
                     <NavLink className="nav-link" to="/trips">My Trips</NavLink>
                   </li>
-                  <li>
-                    <NavLink className="nav-link" to="/profile">My Profile</NavLink>
-                  </li>
+                  
 
                 </ul>
               </div>
