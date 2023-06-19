@@ -4,7 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import searchFilter from "./searchFilter";
-import { countries } from '../../sample-data/countries';
+import { countries } from '../../data/countries';
+import shortid from "shortid";
 
 
 
@@ -39,7 +40,7 @@ const SearchBar = ({
         {dataFiltered.map((d, index) => (
           <div
             className="search-bar-dropdown"
-            key={index}
+            key={shortid.generate()}
           >
             {d}
           </div>

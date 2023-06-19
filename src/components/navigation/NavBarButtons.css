@@ -1,0 +1,34 @@
+
+#dropdown-button {
+  background-color: #fff;
+  border-radius: 50px;
+  width: 70px;
+  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+  height: 34px;
+}
+
+
+#nav-profile-picture {
+  min-width: 30px;
+  height: 30px;
+  background-color: #c3c3c3;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+#nav-profile-picture img {
+  border-radius: 50%;
+}
+
+.fa-profile-picture {
+  width: 50%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.hamburger-menu {
+  color: #183052;
+  font-size: 7px;
+}

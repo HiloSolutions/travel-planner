@@ -1,0 +1,41 @@
+.dialog-container {
+  width: 100vw;
+}
+
+.text-field {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  max-height: 300px;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 20px;
+}

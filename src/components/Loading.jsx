@@ -1,9 +1,20 @@
-import React from 'react'
+import React from 'react';
+import loading from '../images/loading.gif';
 
 const Loading = () => {
   return (
-    <div>Loading</div>
-  )
-}
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        width: '100vw',
+      }}
+    >
+      <img src={loading} alt="Loading" />
+    </div>
+  );
+};
 
-export default Loading
+export default Loading;

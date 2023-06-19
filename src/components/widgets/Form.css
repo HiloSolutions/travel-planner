@@ -1,0 +1,12 @@
+.form-container {
+  display: flex;
+  gap: 2.5%;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+.input-container {
+  width: 48.75%;
+  padding: 1rem;
+}

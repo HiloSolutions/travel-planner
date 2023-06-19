@@ -1,0 +1,29 @@
+#ellipsis-dropdown-button {
+  background-color: transparent;
+  border-radius: 50px;
+  max-width: 10rem;
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.ellipsis-dropdown-container {
+  border: none;
+  cursor: pointer;
+}
+
+.option {
+  font-size: 14px;
+}
+
+.option span{
+margin-left: 10px;
+}
+
+.delete {
+  color: red;
+}
+
+.edit {
+  color: #5170FF;
+}

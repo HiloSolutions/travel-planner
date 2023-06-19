@@ -4,7 +4,7 @@ const RecenterMap = (center) => {
 
   
   return (
-    <div>RecenterMap</div>
+    <div id='map'></div>
   )
 }
 
