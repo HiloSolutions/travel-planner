@@ -22,8 +22,11 @@ const Map = ({
   setLocations,
   tripId
 }) => {
-  const { user } = useAuth0();
 
+
+
+  const { user } = useAuth0();
+ 
   const mapClicked = (e) => {
     const newLocation = {
       location_lat: e.latlng.lat,

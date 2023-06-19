@@ -4,39 +4,37 @@ import {
   InputLabel,
   Button,
   DialogContent,
-  FormControl,
-  Select,
-  MenuItem,
-  TextField,
   Box
 } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
+import { updateLocationPicture } from '../../api/locationEndpoints';
 
-const EditPicture = ({ picture, setOpenEdit }) => {
-  const [isFormDirty, setIsFormDirty] = useState(false);
+const EditPicture = ({
+  location,
+  initialPicture,
+  setOpenEdit,
+  isFormDirty,
+  setIsFormDirty
+}) => {
+  const [newPicture, setNewPicture] = useState(null);
 
-
-
-  //methods
-  const handleFormChange = () => {
+  const handleFileSelect = (event) => {
     setIsFormDirty(true);
+    setNewPicture(event.target.files[0]);
+  };
+
+  const onSave = () => {
+    updateLocationPicture(newPicture, location.id);
+    setIsFormDirty(false);
   };
 
   const onClose = () => {
     setOpenEdit(false);
   };
 
-  
-  //variables
-  const inputProps = {
-    style: {
-      fontSize: 14.6,
-      width: "100%"
-    },
-  };
-
   const labelStyle = {
-    fontWeight: "medium",
-    width: "100%",
+    fontWeight: 'medium',
+    width: '100%',
     fontSize: '16px',
     marginTop: '15px'
   };
@@ -44,48 +42,61 @@ const EditPicture = ({ picture, setOpenEdit }) => {
   return (
     <>
       <DialogContent>
-
         <div className="image-container">
-          <img src={picture} alt="Cover" />
+          {newPicture ? (
+            <img
+              key={newPicture.name}
+              src={URL.createObjectURL(newPicture)}
+              alt="Cover"
+            />
+          ) : (
+            <img src={initialPicture} alt="Cover" />
+          )}
         </div>
 
         <Box
           noValidate
           component="form"
+          encType="multipart/form-data"
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: '100%',
+            width: '100%'
           }}
         >
-          {/* Name of location */}
-          <InputLabel sx={labelStyle}>New URL</InputLabel>
-          <TextField
-            className='text-field'
-            name="location-name"
-            type="text"
-            variant='filled'
-            size="small"
-            InputProps={inputProps}
-            onChange={handleFormChange}
+          <InputLabel sx={{ ...labelStyle, marginTop: '15px' }}>New URL</InputLabel>
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="edit-picture-input"
+            type="file"
+            onChange={handleFileSelect}
           />
+          <label htmlFor="edit-picture-input">
+            <Button
+              variant="outlined"
+              component="span"
+              startIcon={<PhotoCamera />}
+              sx={{ width: '100%', marginTop: '5px' }}
+            >
+              Choose Picture
+            </Button>
+          </label>
         </Box>
-
-
       </DialogContent>
       <DialogActions>
         <Button
           onClick={onClose}
           variant="outlined"
-          size='large'
+          size="large"
           sx={{ width: '50%' }}
         >
           Go Back
         </Button>
         <Button
-          onClick={onClose}
+          onClick={onSave}
           variant="contained"
-          size='large'
+          size="large"
           sx={{ width: '50%' }}
           disabled={!isFormDirty}
           disableElevation
@@ -94,7 +105,7 @@ const EditPicture = ({ picture, setOpenEdit }) => {
         </Button>
       </DialogActions>
     </>
-  )
-}
+  );
+};
 
-export default EditPicture
+export default EditPicture;

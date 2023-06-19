@@ -23,6 +23,7 @@ const LocationList = ({
 
   const itemClassName = isHovered ? 'location-list-item hovered' : 'location-list-item';
 
+  
   const chooseColor = () => {
     if (category === 'sightSeeing' || category === 'artAndEducation') {
       return '#cb273b';

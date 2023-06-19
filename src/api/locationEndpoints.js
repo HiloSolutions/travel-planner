@@ -49,10 +49,23 @@ const editLocationInDb = (location) => {
   });
 }
 
+const updateLocationPicture = (picture, locationId) => {
+  return axios.post('http://localhost:8000/editPicture', { picture, locationId })
+    .then((response) => {
+      console.log('Database updated with location picture');
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('An error occurred while updating location picture:', error);
+      throw error;
+    });
+};
+
 export {
   getTripLocations,
   getLocationTypes,
   deleteLocation,
   addLocationToDb,
-  editLocationInDb
+  editLocationInDb,
+  updateLocationPicture
 };

@@ -4,7 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import EditPicture from '../widgets/EditPicture';
 
-const EditPictureButton = ({ picture }) => {
+const EditPictureButton = ({
+  initialPicture,
+  isFormDirty,
+  setIsFormDirty,
+  location
+}) => {
   const [openEdit, setOpenEdit] = useState(false);
 
   const handleClick = () => {
@@ -33,9 +38,12 @@ const EditPictureButton = ({ picture }) => {
         }}
       >
         <EditPicture
-          picture={picture}
+          location={location}
+          initialPicture={initialPicture}
           onClose={handleEditClose}
           setOpenEdit={setOpenEdit}
+          isFormDirty={isFormDirty}
+          setIsFormDirty={setIsFormDirty}
         />
       </Dialog>
     </>
